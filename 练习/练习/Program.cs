@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Test.DesignPattern;
 using 练习.AssemblyTest;
 using 练习.AttributeTest;
 using 练习.BugTest;
@@ -65,6 +66,21 @@ namespace 练习
 
             //随机数测试
             //RandomMain.Write();
+
+            /*//Linq测试
+            LinqMain linqMain = new LinqMain();
+            linqMain.Write();*/
+
+            /*//指针测试
+            PointerMain pointerMain = new PointerMain();
+            pointerMain.Write();*/
+
+            /*//集合测试
+            GatherMain gatherMain = new GatherMain();
+            gatherMain.Write();*/
+
+            //设计模式
+            //DesignPatternMain.Write();
 
             Console.ReadKey();
         }
