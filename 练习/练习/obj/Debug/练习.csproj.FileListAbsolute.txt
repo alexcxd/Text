@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\练习.exe.config
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\练习.exe
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\练习.pdb
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\obj\Debug\练习.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\obj\Debug\练习.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\obj\Debug\练习.exe
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\obj\Debug\练习.pdb
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\Entity.dll
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\Entity.pdb
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\obj\Debug\练习.csproj.CopyComplete
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\cxd\test\练习\练习\bin\Debug\Newtonsoft.Json.xml
