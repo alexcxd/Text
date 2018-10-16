@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Test.DesignPattern.Factory;
+using 练习.DesignPattern;
 
 namespace Test.DesignPattern
 {
@@ -14,7 +15,7 @@ namespace Test.DesignPattern
         {
             //SimpleFactoryPattern.SimpleFactoryPatternMain();
             //FactoryPattern.FactoryPatternMain();
-            AbstractFactoryPattern.AbstractFactoryPatternMain();
+            //AbstractFactoryPattern.AbstractFactoryPatternMain();
 
             //StrategyPattern.StrategyPatternMain();
 
@@ -28,6 +29,12 @@ namespace Test.DesignPattern
             //BuilderPattern.BuliderPatternMain();
 
             //ObserverPattern.ObserverPatternMain();
+
+            //StatePattern.StatePatternMain();
+
+            //AdapterPattern.AdapterPatternMian();
+
+            MementoPattern.MementoPatternMain();
         }
 
     }

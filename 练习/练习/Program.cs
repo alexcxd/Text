@@ -58,8 +58,8 @@ namespace 练习
             stringTest.WriteLine();*/
 
             //bug再现测试
-            BugTest.Main bugMain = new BugTest.Main();
-            bugMain.WriteLine();
+            /*BugTest.Main bugMain = new BugTest.Main();
+            bugMain.WriteLine();*/
 
             //特性测试
             /*AttributeTestMain.Write();*/
@@ -80,12 +80,12 @@ namespace 练习
             gatherMain.Write();*/
 
             //设计模式
-            //DesignPatternMain.Write();
+            DesignPatternMain.Write();
 
             Console.ReadKey();
         }
 
-        
+
     }
-    
+
 }

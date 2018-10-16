@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignPattern\AdapterPattern.cs" />
     <Compile Include="DesignPattern\Factory\AbstractFactoryPattern.cs" />
     <Compile Include="AssemblyTest\AppDomainTest.cs" />
     <Compile Include="AssemblyTest\AssemblyMain.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="DesignPattern\DesignPatternMain.cs" />
     <Compile Include="DesignPattern\FacadePattern.cs" />
     <Compile Include="DesignPattern\Factory\FactoryPattern.cs" />
+    <Compile Include="DesignPattern\MementoPattern.cs" />
+    <Compile Include="DesignPattern\StatePattern.cs" />
     <Compile Include="Gather\GatherMain.cs" />
     <Compile Include="Json\JsonMian.cs" />
     <Compile Include="Json\JsonTest.cs" />
