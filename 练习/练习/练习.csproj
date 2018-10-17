@@ -52,7 +52,6 @@
     <Compile Include="AssemblyTest\AssemblyMain.cs" />
     <Compile Include="AssemblyTest\DynamicCreateAssembly.cs" />
     <Compile Include="AttributeTest\AttributeDemo1.cs" />
-    <Compile Include="AttributeTest\AttributeReflect.cs" />
     <Compile Include="AttributeTest\AttributeTestMain.cs" />
     <Compile Include="BugTest\GetSet_StackOverflowException.cs" />
     <Compile Include="BugTest\Main.cs" />
