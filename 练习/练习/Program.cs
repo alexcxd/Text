@@ -57,11 +57,11 @@ namespace 练习
             stringTest.WriteLine();*/
 
             //bug再现测试
-            BugTest.Main bugMain = new BugTest.Main();
-            bugMain.WriteLine();
+            /*BugTest.Main bugMain = new BugTest.Main();
+            bugMain.WriteLine();*/
 
             //特性测试
-            /*AttributeTestMain.Write();*/
+            AttributeTestMain.Write();
 
             //随机数测试
             //RandomMain.Write();

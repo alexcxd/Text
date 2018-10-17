@@ -49,6 +49,7 @@
     <Compile Include="AssemblyTest\AssemblyMain.cs" />
     <Compile Include="AssemblyTest\DynamicCreateAssembly.cs" />
     <Compile Include="AttributeTest\AttributeDemo1.cs" />
+    <Compile Include="AttributeTest\AttributeReflect.cs" />
     <Compile Include="AttributeTest\AttributeTestMain.cs" />
     <Compile Include="BugTest\GetSet_StackOverflowException.cs" />
     <Compile Include="BugTest\Main.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="RandomTest\RandomMain.cs" />
     <Compile Include="Reflect\AssemblyReflect.cs" />
     <Compile Include="Reflect\Demo1.cs" />
-    <Compile Include="Reflect\Demo2.cs" />
     <Compile Include="Reflect\DynamicToReflect.cs" />
     <Compile Include="Reflect\ReflectMain.cs" />
     <Compile Include="Reflect\User.cs" />
