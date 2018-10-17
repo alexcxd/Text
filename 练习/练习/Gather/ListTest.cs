@@ -47,6 +47,9 @@ namespace Test.Gather
             //通过委托，对列表里的每个元素进行某种操作，参数为方法名
             racers.ForEach(Console.WriteLine);
 
+            //list.Remove(Object)是通过比较引用地址
+            //因此新new出的无法将List中的数据移除
+
             //删除指定位置的元素
             racers.RemoveAt(1);
 

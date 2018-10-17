@@ -61,8 +61,8 @@ namespace 练习
             /*BugTest.Main bugMain = new BugTest.Main();
             bugMain.WriteLine();*/
 
-            //特性测试
-            AttributeTestMain.Write();
+            /*//特性测试
+            AttributeTestMain.Write();*/
 
             //随机数测试
             //RandomMain.Write();
@@ -81,6 +81,8 @@ namespace 练习
 
             //设计模式
             DesignPatternMain.Write();
+
+
 
             Console.ReadKey();
         }

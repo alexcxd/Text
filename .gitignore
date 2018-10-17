@@ -1,6 +1,6 @@
-.vs
+*.vs
 bin/
 obj/
-.cache
-.exe
-.pdb
+*.cache
+*.exe
+*.pdb

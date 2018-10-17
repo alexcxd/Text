@@ -34,7 +34,11 @@ namespace Test.DesignPattern
 
             //AdapterPattern.AdapterPatternMian();
 
-            MementoPattern.MementoPatternMain();
+            //MementoPattern.MementoPatternMain();
+
+            //CompositePattern.CompositePatternMain();
+
+            IteratorPattern.IteratorPatternMain();
         }
 
     }
