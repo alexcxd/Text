@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesignPattern\AdapterPattern.cs" />
+    <Compile Include="DesignPattern\Factory\AbstractFactoryPattern.cs" />
     <Compile Include="AssemblyTest\AppDomainTest.cs" />
     <Compile Include="AssemblyTest\AssemblyMain.cs" />
     <Compile Include="AssemblyTest\DynamicCreateAssembly.cs" />
@@ -54,21 +57,41 @@
     <Compile Include="BugTest\GetSet_StackOverflowException.cs" />
     <Compile Include="BugTest\Main.cs" />
     <Compile Include="BugTest\ShallowCopy.cs" />
+    <Compile Include="DesignPattern\BuilderPattern.cs" />
     <Compile Include="ClassTest\Main.cs" />
     <Compile Include="ClassTest\StringTest.cs" />
     <Compile Include="DataStructrue\BinarySortTreeLink.cs" />
     <Compile Include="DataStructrue\DataStructrueMain.cs" />
     <Compile Include="DataStructrue\BinaryTreeArray.cs" />
+    <Compile Include="DesignPattern\DecoratorPattern.cs" />
+    <Compile Include="DesignPattern\DesignPatternMain.cs" />
+    <Compile Include="DesignPattern\FacadePattern.cs" />
+    <Compile Include="DesignPattern\Factory\FactoryPattern.cs" />
+    <Compile Include="DesignPattern\MementoPattern.cs" />
+    <Compile Include="DesignPattern\StatePattern.cs" />
+    <Compile Include="Gather\GatherMain.cs" />
     <Compile Include="Json\JsonMian.cs" />
     <Compile Include="Json\JsonTest.cs" />
+    <Compile Include="DesignPattern\ObserverPattern.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Gather\LinkTest.cs" />
+    <Compile Include="Gather\ListTest.cs" />
+    <Compile Include="Linq\LinqBasis.cs" />
+    <Compile Include="Linq\LinqMain.cs" />
+    <Compile Include="Pointer\PointerMain.cs" />
+    <Compile Include="Pointer\PointerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DesignPattern\PrototypePattern.cs" />
+    <Compile Include="DesignPattern\ProxyPattern.cs" />
+    <Compile Include="Gather\QueueTest.cs" />
     <Compile Include="RandomTest\RandomMain.cs" />
     <Compile Include="Reflect\AssemblyReflect.cs" />
     <Compile Include="Reflect\Demo1.cs" />
     <Compile Include="Reflect\DynamicToReflect.cs" />
     <Compile Include="Reflect\ReflectMain.cs" />
     <Compile Include="Reflect\User.cs" />
+    <Compile Include="DesignPattern\StrategyPattern.cs" />
+    <Compile Include="DesignPattern\Factory\SimpleFactoryPattern.cs" />
     <Compile Include="Test\Info.cs" />
     <Compile Include="Test\KeyValue.cs" />
     <Compile Include="Test\ObjectToObject.cs" />
