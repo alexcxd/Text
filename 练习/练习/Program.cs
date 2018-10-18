@@ -82,8 +82,6 @@ namespace 练习
             //设计模式
             DesignPatternMain.Write();
 
-
-
             Console.ReadKey();
         }
 

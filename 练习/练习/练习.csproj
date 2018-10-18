@@ -69,6 +69,7 @@
     <Compile Include="DesignPattern\Factory\FactoryPattern.cs" />
     <Compile Include="DesignPattern\IteratorPattern.cs" />
     <Compile Include="DesignPattern\MementoPattern.cs" />
+    <Compile Include="DesignPattern\SingletonPattern.cs" />
     <Compile Include="DesignPattern\StatePattern.cs" />
     <Compile Include="Gather\GatherMain.cs" />
     <Compile Include="Json\JsonMian.cs" />

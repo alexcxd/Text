@@ -38,7 +38,9 @@ namespace Test.DesignPattern
 
             //CompositePattern.CompositePatternMain();
 
-            IteratorPattern.IteratorPatternMain();
+            //IteratorPattern.IteratorPatternMain();
+
+            SingletonPattern.SingletonPatternMain();
         }
 
     }
