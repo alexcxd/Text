@@ -10,3 +10,8 @@ C:\Users\Administrator\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.cspr
 C:\Users\Administrator\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.dll
 C:\Users\Administrator\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.pdb
+E:\Desktop\github\练习\Entity\bin\Debug\Entity.dll
+E:\Desktop\github\练习\Entity\bin\Debug\Entity.pdb
+E:\Desktop\github\练习\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+E:\Desktop\github\练习\Entity\obj\Debug\Entity.dll
+E:\Desktop\github\练习\Entity\obj\Debug\Entity.pdb

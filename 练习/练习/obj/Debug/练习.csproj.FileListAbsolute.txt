@@ -22,3 +22,15 @@ C:\Users\Administrator\Desktop\cxd\test\Text\练习\练习\obj\Debug\练习.cspr
 C:\Users\Administrator\Desktop\cxd\test\Text\练习\练习\obj\Debug\练习.csproj.CopyComplete
 C:\Users\Administrator\Desktop\cxd\test\Text\练习\练习\obj\Debug\练习.exe
 C:\Users\Administrator\Desktop\cxd\test\Text\练习\练习\obj\Debug\练习.pdb
+E:\Desktop\github\练习\练习\bin\Debug\练习.exe.config
+E:\Desktop\github\练习\练习\bin\Debug\练习.exe
+E:\Desktop\github\练习\练习\bin\Debug\练习.pdb
+E:\Desktop\github\练习\练习\bin\Debug\Entity.dll
+E:\Desktop\github\练习\练习\bin\Debug\Newtonsoft.Json.dll
+E:\Desktop\github\练习\练习\bin\Debug\Entity.pdb
+E:\Desktop\github\练习\练习\bin\Debug\Newtonsoft.Json.xml
+E:\Desktop\github\练习\练习\obj\Debug\练习.csprojAssemblyReference.cache
+E:\Desktop\github\练习\练习\obj\Debug\练习.csproj.CoreCompileInputs.cache
+E:\Desktop\github\练习\练习\obj\Debug\练习.csproj.CopyComplete
+E:\Desktop\github\练习\练习\obj\Debug\练习.exe
+E:\Desktop\github\练习\练习\obj\Debug\练习.pdb

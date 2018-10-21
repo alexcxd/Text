@@ -40,7 +40,20 @@ namespace Test.DesignPattern
 
             //IteratorPattern.IteratorPatternMain();
 
-            SingletonPattern.SingletonPatternMain();
+            //SingletonPattern.SingletonPatternMain();
+
+            //BridgePattern.BridgePatternMian();
+
+            //CommandPattern.CommandPatternMain();
+
+            //ChainOfResponsibilityPattern.ChainOfResponsibilityPatternMain();
+
+            //MediatorPattern.MediatorPatternMain();
+
+            //FlyweightPattern.FlyweightPatternMain();
+
+            InterpreterPrttern.InterpreterPrtternMain();
+
         }
 
     }
