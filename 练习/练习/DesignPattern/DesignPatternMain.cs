@@ -52,7 +52,9 @@ namespace Test.DesignPattern
 
             //FlyweightPattern.FlyweightPatternMain();
 
-            InterpreterPrttern.InterpreterPrtternMain();
+            //InterpreterPrttern.InterpreterPrtternMain();
+
+            VisitorPattern.VisitorPatternMain();
 
         }
 
