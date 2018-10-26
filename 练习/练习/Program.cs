@@ -65,7 +65,7 @@ namespace 练习
             AttributeTestMain.Write();*/
 
             //随机数测试
-            //RandomMain.Write();
+            RandomMain.Write();
 
             /*//Linq测试
             LinqMain linqMain = new LinqMain();
@@ -80,7 +80,7 @@ namespace 练习
             gatherMain.Write();*/
 
             //设计模式
-            DesignPatternMain.Write();
+            //DesignPatternMain.Write();
 
             Console.ReadKey();
         }
