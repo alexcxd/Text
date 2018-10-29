@@ -10,7 +10,8 @@ namespace 练习.ThreadTest
     {
         public static void Write()
         {
-            AsynDelegate.AsynDelegateMain();
+            //AsynDelegate.AsynDelegateMain();
+            ThreadClass.ThreadClassMain();
         }
     }
 }
