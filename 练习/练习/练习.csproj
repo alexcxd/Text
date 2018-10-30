@@ -104,6 +104,9 @@
     <Compile Include="Test\Info.cs" />
     <Compile Include="Test\KeyValue.cs" />
     <Compile Include="Test\ObjectToObject.cs" />
+    <Compile Include="ThreadTest\AsynDelegate.cs" />
+    <Compile Include="ThreadTest\ThreadClass.cs" />
+    <Compile Include="ThreadTest\TreadMain.cs" />
     <Compile Include="正则表达式\EasyRegex.cs" />
     <Compile Include="访问级别\AccessLevelMain.cs" />
     <Compile Include="访问级别\InternalTest.cs" />

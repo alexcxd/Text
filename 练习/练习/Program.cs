@@ -14,6 +14,7 @@ using 练习.Json;
 using 练习.Random;
 using 练习.Reflect;
 using 练习.Test;
+using 练习.ThreadTest;
 using 练习.正则表达式;
 using 练习.访问级别;
 
@@ -64,8 +65,8 @@ namespace 练习
             /*//特性测试
             AttributeTestMain.Write();*/
 
-            /*//随机数测试
-            RandomMain.Write();*/
+            //随机数测试
+            //RandomMain.Write();
 
             /*//Linq测试
             LinqMain linqMain = new LinqMain();
@@ -81,6 +82,9 @@ namespace 练习
 
             //设计模式
             //DesignPatternMain.Write();
+
+            //线程测试
+            TreadMain.Write();
 
             Console.ReadKey();
         }
