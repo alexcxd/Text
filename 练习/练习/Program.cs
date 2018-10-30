@@ -64,8 +64,8 @@ namespace 练习
             /*//特性测试
             AttributeTestMain.Write();*/
 
-            //随机数测试
-            RandomMain.Write();
+            /*//随机数测试
+            RandomMain.Write();*/
 
             /*//Linq测试
             LinqMain linqMain = new LinqMain();
