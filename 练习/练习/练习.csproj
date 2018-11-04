@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStructrue\LinkList\LinkList.cs" />
+    <Compile Include="DataStructrue\LinkList\LinkListMain.cs" />
+    <Compile Include="DataStructrue\SequenceList\SequenceList.cs" />
+    <Compile Include="DataStructrue\SequenceList\SequenceListMain.cs" />
+    <Compile Include="DataStructrue\Tree\TreeMain.cs" />
     <Compile Include="DesignPattern\结构型模式\AdapterPattern.cs" />
     <Compile Include="DesignPattern\结构型模式\BridgePattern.cs" />
     <Compile Include="DesignPattern\行为型模式\ChainOfResponsibilityPattern.cs" />
@@ -63,9 +68,9 @@
     <Compile Include="DesignPattern\创建型模式\BuilderPattern.cs" />
     <Compile Include="ClassTest\Main.cs" />
     <Compile Include="ClassTest\StringTest.cs" />
-    <Compile Include="DataStructrue\BinarySortTreeLink.cs" />
+    <Compile Include="DataStructrue\Tree\BinarySortTreeLink.cs" />
     <Compile Include="DataStructrue\DataStructrueMain.cs" />
-    <Compile Include="DataStructrue\BinaryTreeArray.cs" />
+    <Compile Include="DataStructrue\Tree\BinaryTreeArray.cs" />
     <Compile Include="DesignPattern\结构型模式\DecoratorPattern.cs" />
     <Compile Include="DesignPattern\DesignPatternMain.cs" />
     <Compile Include="DesignPattern\结构型模式\FacadePattern.cs" />
@@ -121,6 +126,9 @@
       <Project>{fc5ddf2d-f6ec-45ae-b432-1fa5e8e07246}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataStructrue\Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

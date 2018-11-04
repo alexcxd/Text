@@ -19,8 +19,6 @@ namespace 练习.ThreadTest
 
         }
 
-        //
-
         /// <summary>
         /// 投票
         /// </summary>
