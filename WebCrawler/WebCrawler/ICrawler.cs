@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace WebCrawler
 
         event EventHandler<OnErrorEventArgs> OnError;//爬虫出错事件
 
-        Task<string> Start(Uri uri, string proxy); //异步爬虫
+        Task<string> Start(Uri uri, string refererUrl, string proxy); //异步爬虫
 
 
     }

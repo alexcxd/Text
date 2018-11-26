@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using WebCrawler.Bussiness;
 
 namespace WebCrawler
 {
@@ -14,7 +15,13 @@ namespace WebCrawler
     {
         static void Main(string[] args)
         {
+            var dmzj = new DmzjCrawlerBussiness();
+            dmzj.GetAllChapters();
 
+        }
+
+        public void Test()
+        {
             string url = "https://images.dmzj.com/h/%E9%BB%84%E9%87%91%E7%A5%9E%E5%A8%81/%E7%AC%AC161%E8%AF%9D/02.jpg";
             //string url = "https://manhua.dmzj.com/hjsw/78305.shtml";
             string oriUrl = "https://manhua.dmzj.com/hjsw/78305.shtml";
@@ -37,7 +44,6 @@ namespace WebCrawler
                     bitmap.Save(filePath, ImageFormat.Jpeg);
                 }
             }
-                
         }
     }
 }

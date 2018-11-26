@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bussiness\DmzjCrawlerBussiness.cs" />
     <Compile Include="Events\OnCompletedEventArgs.cs" />
     <Compile Include="Events\OnErrorEventArgs.cs" />
     <Compile Include="Events\OnStartEventArgs.cs" />

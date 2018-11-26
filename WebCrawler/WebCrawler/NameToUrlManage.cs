@@ -12,9 +12,9 @@ namespace WebCrawler
         private Queue<NameToUrl> items;
         private object objlock = new object();
 
-        public NameToUrlManage(ICollection<NameToUrl> urls)
+        public NameToUrlManage(Queue<NameToUrl> urls)
         {
-            this.items = urls as Queue<NameToUrl>;
+            this.items = urls;
         }
 
         public NameToUrl GetUrl()
@@ -23,7 +23,7 @@ namespace WebCrawler
             {
                 if (items == null || items.Count == 0)
                 {
-                    throw new ArgumentNullException("未初始化或者队列已为空");
+                    throw new ArgumentNullException();
                 }
                 return items.Dequeue();
             }
