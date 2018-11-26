@@ -11,15 +11,17 @@ namespace WebCrawler.Bussiness
     /// </summary>
     public class DmzjCrawlerBussiness
     {
-        private static string firstReferer = "https://manhua.dmzj.com/";
-        private static string filePath = @"E:\Desktop\漫画";
-        private static string filePathLog = filePath + @"\Log.txt";
+        private static readonly string firstReferer = "https://manhua.dmzj.com/";
+        private static readonly string filePath = @"E:\Desktop\漫画";
+        private static readonly string filePathLog = filePath + @"\Log.txt";
+        private static NameToUrlManage manager;
 
         public bool GetAllChapters()
         {
             var chapterList = new List<NameToUrl>();
             var uri = firstReferer + @"hjsw/";
             var crawler = new MyCrawler();
+           
 
             using (var stream = new FileStream(filePathLog, FileMode.Append))
             {
@@ -48,12 +50,18 @@ namespace WebCrawler.Bussiness
                             nameToUrl.Url = url.Groups["href"].Value;
                             urlQueue.Enqueue(nameToUrl);
                         }
-                        var manager = new NameToUrlManage(urlQueue);
+                        manager = new NameToUrlManage(urlQueue);
+                        GetChapterId();
                     };
                     crawler.Start(new Uri(uri), firstReferer).Wait();
                 }
             }
             return true;
+        }
+
+        public void GetChapterId()
+        {
+            
         }
     }
 }
