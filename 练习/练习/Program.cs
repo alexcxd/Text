@@ -11,6 +11,7 @@ using 练习.AttributeTest;
 using 练习.BugTest;
 using 练习.ClassTest;
 using 练习.DataStructrue;
+using 练习.FileReadAndWrite;
 using 练习.Json;
 using 练习.Random;
 using 练习.Reflect;
@@ -85,7 +86,7 @@ namespace 练习
             //DesignPatternMain.Write();
 
             //线程测试
-            //TreadMain.Write();
+            TreadMain.Write();
 
             Console.ReadKey();
         }

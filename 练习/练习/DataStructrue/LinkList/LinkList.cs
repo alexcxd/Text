@@ -24,12 +24,13 @@ namespace 练习.DataStructrue.LinkList
         /// </summary>
         private static Node<T> root;
 
-        public Node<T> nodeEnd = root;
+        public Node<T> nodeEnd;
 
         public LinkList()
         {
             root = new Node<T>();
             root.NextNode = null;
+            nodeEnd = root;
         }
 
         /// <summary>
@@ -48,6 +49,12 @@ namespace 练习.DataStructrue.LinkList
             nodeEnd = node;
         }
 
+        /// <summary>
+        /// 移除最后一个节点
+        /// </summary>
+        public void Remove()
+        {
 
+        }
     }
 }

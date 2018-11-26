@@ -83,6 +83,8 @@
     <Compile Include="DesignPattern\创建型模式\SingletonPattern.cs" />
     <Compile Include="DesignPattern\行为型模式\StatePattern.cs" />
     <Compile Include="DesignPattern\行为型模式\VisitorPattern.cs" />
+    <Compile Include="FileReadAndWrite\FileReadAndWriteMain.cs" />
+    <Compile Include="FileReadAndWrite\WriteTest.cs" />
     <Compile Include="Gather\GatherMain.cs" />
     <Compile Include="Json\JsonMian.cs" />
     <Compile Include="Json\JsonTest.cs" />
