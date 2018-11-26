@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32.SafeHandles;
 using Test.DesignPattern;
 using 练习.AssemblyTest;
 using 练习.AttributeTest;
@@ -84,11 +85,10 @@ namespace 练习
             //DesignPatternMain.Write();
 
             //线程测试
-            TreadMain.Write();
+            //TreadMain.Write();
 
             Console.ReadKey();
         }
-
 
     }
 
