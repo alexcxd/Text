@@ -12,20 +12,35 @@ namespace WebCrawler
         private Queue<NameToUrl> items;
         private object objlock = new object();
 
+        public int Count => items.Count;
+
+        public NameToUrlManage()
+        {
+            items = new Queue<NameToUrl>();
+        }
+
         public NameToUrlManage(Queue<NameToUrl> urls)
         {
-            this.items = urls;
+            items = urls;
         }
 
         public NameToUrl GetUrl()
         {
+            if (items == null || items.Count == 0)
+            {
+                throw new ArgumentNullException();
+            }
             lock (objlock)
             {
-                if (items == null || items.Count == 0)
-                {
-                    throw new ArgumentNullException();
-                }
                 return items.Dequeue();
+            }
+        }
+
+        public void SetId(NameToUrl nameToUrl)
+        {
+            lock (objlock)
+            {
+                items.Enqueue(nameToUrl);
             }
         }
     }

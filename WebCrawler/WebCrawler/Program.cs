@@ -18,6 +18,7 @@ namespace WebCrawler
             var dmzj = new DmzjCrawlerBussiness();
             dmzj.GetAllChapters();
 
+            Console.ReadKey();
         }
 
         public void Test()
