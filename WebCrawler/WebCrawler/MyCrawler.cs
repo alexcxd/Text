@@ -23,7 +23,7 @@ namespace WebCrawler
 
         public MyCrawler() { }
 
-        public async Task<string> Start(Uri uri, string refererUrl, string proxy = null)
+        public async Task<string> Start(Uri uri, string refererUrl, Dictionary<string, string> specialArguments = null)
         {
             return await Task.Run(() =>
             {
@@ -50,7 +50,7 @@ namespace WebCrawler
                     request.Method = "Get";
                     request.Referer = refererUrl;
                     request.CookieContainer = CookieContainer;
-                    if(proxy != null) request.Proxy = new WebProxy(proxy);
+                    if(specialArguments != null && specialArguments["proxy"] != null) request.Proxy = new WebProxy(specialArguments["proxy"]);
 
                     using (var response = (HttpWebResponse) request.GetResponse())
                     {
@@ -106,7 +106,7 @@ namespace WebCrawler
                     sw.Stop();
                     var milliseconds = sw.ElapsedMilliseconds;//获取请求执行时间
                     var threadId = Thread.CurrentThread.ManagedThreadId;
-                    OnCompleted?.Invoke(this,new OnCompletedEventArgs(uri, threadId, milliseconds, pageSource, bitmap));
+                    OnCompleted?.Invoke(this,new OnCompletedEventArgs(uri, threadId, milliseconds, pageSource, bitmap, specialArguments));
                 }
                 catch (Exception e)
                 {

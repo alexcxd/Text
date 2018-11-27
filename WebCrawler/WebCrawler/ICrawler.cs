@@ -16,7 +16,7 @@ namespace WebCrawler
 
         event EventHandler<OnErrorEventArgs> OnError;//爬虫出错事件
 
-        Task<string> Start(Uri uri, string refererUrl, string proxy); //异步爬虫
+        Task<string> Start(Uri uri, string refererUrl, Dictionary<string, string> specialArguments = null); //异步爬虫
 
 
     }
