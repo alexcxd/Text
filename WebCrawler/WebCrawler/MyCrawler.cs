@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace WebCrawler
             {
                 OnStart?.Invoke(this, new OnStartEventArgs(uri));
                 var pageSource = string.Empty;
-                Bitmap bitmap = new Bitmap(100,200);
+                Bitmap bitmap = new Bitmap(100,100);
                 try
                 {
                     var sw = new Stopwatch();
@@ -50,7 +51,7 @@ namespace WebCrawler
                     request.Method = "Get";
                     request.Referer = refererUrl;
                     request.CookieContainer = CookieContainer;
-                    if(specialArguments != null && specialArguments["proxy"] != null) request.Proxy = new WebProxy(specialArguments["proxy"]);
+                    if(specialArguments != null && specialArguments.ContainsKey("proxy")) request.Proxy = new WebProxy(specialArguments["proxy"]);
 
                     using (var response = (HttpWebResponse) request.GetResponse())
                     {
@@ -82,7 +83,7 @@ namespace WebCrawler
                                 }
                             }
                         }
-                        else if (response.ContentEncoding.ToLower().Equals("image/jpeg"))
+                        else if (response.ContentType.ToLower().Equals("image/jpeg"))
                         {
                             using (var stream = new MemoryStream())
                             {

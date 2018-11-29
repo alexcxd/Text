@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace WebCrawler.Utils
 {
@@ -10,7 +11,7 @@ namespace WebCrawler.Utils
     {
         public static string UrlEncode(string url)
         {
-            byte[] bs = Encoding.GetEncoding("GB2312").GetBytes(url);
+            byte[] bs = Encoding.GetEncoding("UTF-8").GetBytes(url);
             var sb = new StringBuilder();
             for (int i = 0; i < bs.Length; i++)
             {
@@ -20,7 +21,6 @@ namespace WebCrawler.Utils
                 }
                 else
                 {
-                    sb.Append("%" + bs[i++].ToString("x").PadLeft(2, '0'));
                     sb.Append("%" + bs[i].ToString("x").PadLeft(2, '0'));
                 }
             }
