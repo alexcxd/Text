@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
@@ -123,7 +124,6 @@ namespace WebCrawler.Bussiness
                         writer.WriteLine("===============================================");
                     }
                 }
-
             };
             crawler.OnCompleted += (s, e) =>
             {
@@ -214,8 +214,9 @@ namespace WebCrawler.Bussiness
                     {
                         var uriStr = e.Uri.ToString().Split('/');
                         var filePathPicture = filePath + "\\" + uriStr[uriStr.Length - 1];
-                        var a = Directory.Exists(filePath);
-                        e.Bitmap.Save(filePathPicture, ImageFormat.Jpeg);
+                        var memoryStream = new MemoryStream(e.Bitmap);
+                        var bitmap = new Bitmap(memoryStream);
+                        bitmap.Save(filePathPicture, ImageFormat.Jpeg);
                         writer.WriteLine("爬虫抓取任务结束！");
                         writer.WriteLine("耗时：" + e.Milliseconds + "毫秒");
                         writer.WriteLine("线程：" + e.ThreadId + "");

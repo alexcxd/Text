@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Scripting.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -16,8 +17,9 @@ namespace WebCrawler
     {
         static void Main(string[] args)
         {
-            var dmzj = new DmzjCrawlerBussiness();
-            dmzj.GetAllChapters();
+            /*var dmzj = new DmzjCrawlerBussiness();
+            dmzj.GetAllChapters();*/
+            //Console.WriteLine(ScriptEngine.Eval("jscript", "1+2/3"));
 
             Console.ReadKey();
         }

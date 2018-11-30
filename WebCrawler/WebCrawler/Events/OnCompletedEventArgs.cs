@@ -15,13 +15,13 @@ namespace WebCrawler.Events
 
         public string PageSource { get; }// 页面源代码
 
-        public Bitmap Bitmap { get; } //图片信息
+        public byte[] Bitmap { get; } //图片信息
 
         public long Milliseconds { get; }// 爬虫请求执行事件
 
         public Dictionary<string,string> SpecialArguments { get; set; }
 
-        public OnCompletedEventArgs(Uri uri, int threadId, long milliseconds, string pageSource, Bitmap bitmap, Dictionary<string, string> specialArguments = null)
+        public OnCompletedEventArgs(Uri uri, int threadId, long milliseconds, string pageSource, byte[] bitmap, Dictionary<string, string> specialArguments = null)
         {
             Uri = uri;
             ThreadId = threadId;

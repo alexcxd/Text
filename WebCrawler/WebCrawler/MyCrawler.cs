@@ -31,6 +31,7 @@ namespace WebCrawler
                 OnStart?.Invoke(this, new OnStartEventArgs(uri));
                 var pageSource = string.Empty;
                 Bitmap bitmap = new Bitmap(100,100);
+                byte[] bytes = new byte[0];
                 try
                 {
                     var sw = new Stopwatch();
@@ -88,7 +89,10 @@ namespace WebCrawler
                             using (var stream = new MemoryStream())
                             {
                                 responseStream.CopyTo(stream);
-                                bitmap = new Bitmap(stream);
+                                stream.Position = 0;
+                                bytes = new byte[stream.Length];
+                                stream.Read(bytes, 0, bytes.Length);
+
                             }
                         }
                         else
@@ -102,12 +106,11 @@ namespace WebCrawler
                             }
                         }
                     }
-
                     request.Abort(); //取消请求
                     sw.Stop();
                     var milliseconds = sw.ElapsedMilliseconds;//获取请求执行时间
                     var threadId = Thread.CurrentThread.ManagedThreadId;
-                    OnCompleted?.Invoke(this,new OnCompletedEventArgs(uri, threadId, milliseconds, pageSource, bitmap, specialArguments));
+                    OnCompleted?.Invoke(this, new OnCompletedEventArgs(uri, threadId, milliseconds, pageSource, bytes, specialArguments));
                 }
                 catch (Exception e)
                 {
