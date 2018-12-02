@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebCrawler.Model;
 
-namespace WebCrawler
+namespace WebCrawler.Model
 {
     public class NameToUrlManage
     {

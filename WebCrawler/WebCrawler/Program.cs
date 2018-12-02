@@ -1,15 +1,10 @@
-﻿using Microsoft.Scripting.Hosting;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using WebCrawler.Bussiness;
-using WebCrawler.Utils;
+
 
 namespace WebCrawler
 {
@@ -17,9 +12,10 @@ namespace WebCrawler
     {
         static void Main(string[] args)
         {
-            /*var dmzj = new DmzjCrawlerBussiness();
-            dmzj.GetAllChapters();*/
-            //Console.WriteLine(ScriptEngine.Eval("jscript", "1+2/3"));
+            var dmzj = new DmzjCrawlerBussiness();
+            dmzj.GetAllChapters();
+
+            //ClearScriptTest.CleaScriptTestMain();
 
             Console.ReadKey();
         }
@@ -45,6 +41,7 @@ namespace WebCrawler
             {
                 using (var ms = new MemoryStream())
                 {
+                    //多线程要注意流被关闭的问题
                     streamIn.CopyTo(ms);
                     Bitmap bitmap = new Bitmap(ms);
                     bitmap.Save(filePath1, ImageFormat.Jpeg);

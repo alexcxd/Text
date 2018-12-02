@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using WebCrawler.Crawler;
 using WebCrawler.Model;
 using WebCrawler.Utils;
 
@@ -133,7 +134,7 @@ namespace WebCrawler.Bussiness
                 {
                     using (var writer = new StreamWriter(stream))
                     {
-                        var links = Regex.Match(e.PageSource, @"^\|B1_[^|]*\|$");
+                        var links = Regex.Match(e.PageSource, @"<script type=""text/javascript"">(?!<script)*?</script>");
                         var id = "";
                         if (!String.IsNullOrEmpty(links.Value))
                         {
