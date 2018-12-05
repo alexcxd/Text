@@ -82,7 +82,7 @@ namespace WebCrawler.Crawler
                                 }
                             }
                         }
-                        else if (response.ContentType.ToLower().Equals("image/jpeg"))
+                        else if (response.ContentType.ToLower().Split('/')[0].Equals("image"))
                         {
                             using (var stream = new MemoryStream())
                             {

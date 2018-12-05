@@ -23,36 +23,23 @@ namespace WebCrawler.Bussiness
         private static readonly string firstReferer = "https://manhua.dmzj.com/";
         private static readonly string filePath = @"E:\Desktop\漫画";
         private static readonly string filePathLog = filePath + @"\Log.txt";
+        private static readonly string filePathErrorLog = filePath + @"\ErrorLog.txt";
         private static readonly string pictureMain = "https://images.dmzj.com/";
-        private static NameToUrlManage manager = new NameToUrlManage();
 
         public bool GetAllChapters()
         {
-            var chapterList = new List<NameToUrl>();
             var uri = firstReferer + @"hjsw/";
             var crawler = new MyCrawler();
-
-            crawler.OnStart += (s, e) =>
-            {
-                using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
-                    FileShare.Write))
-                {
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        writer.WriteLine("==================任务一开始=======================");
-                        writer.WriteLine(@"地址：" + e.Uri + "开始爬取");
-                    }
-                }
-            };
+            var manager = new NameToUrlManage();
 
             crawler.OnError += (s, e) =>
             {
-                using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
+                using (var stream = new FileStream(filePathErrorLog, FileMode.Append, FileAccess.Write,
                     FileShare.Write))
                 {
-                    using (var writer = new StreamWriter(stream))
+                    using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
-                        writer.WriteLine(@"地址：" + e.Uri + "爬取报错; 错误信息：" + e.Exception.Message + "");
+                        writer.WriteLine(@"章节地址爬取失败；地址：" + e.Uri + "爬取报错; 错误信息：" + e.Exception.Message + "");
                         writer.WriteLine("===============================================");
                     }
                 }
@@ -63,7 +50,7 @@ namespace WebCrawler.Bussiness
                 using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
                     FileShare.Write))
                 {
-                    using (var writer = new StreamWriter(stream))
+                    using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
                         var links = Regex.Match(e.PageSource, "cartoon_online_border[^$]{0,}其它汉化版");
                         var urls = Regex.Matches(links.Value,
@@ -82,47 +69,32 @@ namespace WebCrawler.Bussiness
                         }
                         manager = new NameToUrlManage(urlQueue);
 
-                        writer.WriteLine("爬虫抓取任务完成！开始步骤二！");
+                        writer.WriteLine($"{cartoonName}章节地址爬取完成！开始爬取图片地址！");
                         writer.WriteLine("耗时：" + e.Milliseconds + "毫秒");
                         writer.WriteLine("线程：" + e.ThreadId + "");
                         writer.WriteLine("地址：" + e.Uri.ToString() + "");
                         writer.WriteLine("===============================================");
-                        GetChapterId();
                     }
                 }
-
+                GetChapterId(manager);
             };
             crawler.Start(new Uri(uri), firstReferer).Wait();
             return true;
         }
 
-        public void GetChapterId()
+        public void GetChapterId(NameToUrlManage manager)
         {
             var refererUri = firstReferer + @"hjsw/";
             var crawler = new MyCrawler();
 
-            crawler.OnStart += (s, e) =>
-            {
-                using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
-                    FileShare.Write))
-                {
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        writer.WriteLine("===================任务二开始======================");
-                        writer.WriteLine(@"地址：" + e.Uri + "开始爬取");
-                    }
-                }
-
-            };
-
             crawler.OnError += (s, e) =>
             {
-                using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
+                using (var stream = new FileStream(filePathErrorLog, FileMode.Append, FileAccess.Write,
                     FileShare.Write))
                 {
-                    using (var writer = new StreamWriter(stream))
+                    using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
-                        writer.WriteLine(@"地址：" + e.Uri + "爬取报错; 错误信息：" + e.Exception.Message + "");
+                        writer.WriteLine(@"图片地址爬取失败；地址：" + e.Uri + "爬取报错; 错误信息：" + e.Exception.Message + "");
                         writer.WriteLine("===============================================");
                     }
                 }
@@ -134,7 +106,7 @@ namespace WebCrawler.Bussiness
                 using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
                     FileShare.Write))
                 {
-                    using (var writer = new StreamWriter(stream))
+                    using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
                         var links = Regex.Match(e.PageSource, @"<script type=""text/javascript"">(?<script>[^$]*?)</script>");
 
@@ -170,11 +142,10 @@ namespace WebCrawler.Bussiness
                             }
                             pictrueUrlManaeger = new NameToUrlManage(queue);
 
-                            writer.WriteLine("爬虫抓取任务完成！开始步骤三！");
+                            writer.WriteLine($"{comicName + " - " + chapterName}爬取完成完成！开始爬取图片！");
                             writer.WriteLine("耗时：" + e.Milliseconds + "毫秒");
                             writer.WriteLine("线程：" + e.ThreadId + "");
                             writer.WriteLine("地址：" + e.Uri.ToString() + "");
-                            writer.WriteLine("结果：" + comicName + "-" + chapterName + "");
                             writer.WriteLine("===============================================");
                         }
                     }
@@ -200,28 +171,14 @@ namespace WebCrawler.Bussiness
         {
             var crawler = new MyCrawler();
 
-            crawler.OnStart += (s, e) =>
-            {
-                using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
-                    FileShare.Write))
-                {
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        writer.WriteLine("===================任务三开始======================");
-                        writer.WriteLine(@"地址：" + e.Uri + "开始爬取");
-                    }
-                }
-
-            };
-
             crawler.OnError += (s, e) =>
             {
-                using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
+                using (var stream = new FileStream(filePathErrorLog, FileMode.Append, FileAccess.Write,
                     FileShare.Write))
                 {
-                    using (var writer = new StreamWriter(stream))
+                    using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
-                        writer.WriteLine(@"地址：" + e.Uri + "爬取报错; 错误信息：" + e.Exception.Message + "");
+                        writer.WriteLine(@"某图片爬取失败；地址：" + e.Uri + "爬取报错; 错误信息：" + e.Exception.Message + "");
                         writer.WriteLine("===============================================");
                     }
                 }
@@ -232,7 +189,7 @@ namespace WebCrawler.Bussiness
                 using (var stream = new FileStream(filePathLog, FileMode.Append, FileAccess.Write,
                     FileShare.Write))
                 {
-                    using (var writer = new StreamWriter(stream))
+                    using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
                         var uriStr = e.Uri.ToString().Split('/');
                         var pictrueFilePathCurr = pictrueFilePath + "\\" + uriStr[uriStr.Length - 1];
@@ -248,7 +205,7 @@ namespace WebCrawler.Bussiness
                 }
             };
 
-            for (int i = 0; i < manager.Count; i++)
+            for (int i = 0; i < pictrueUrlManager.Count; i++)
             {
                 crawler.Start(new Uri(pictrueUrlManager.GetUrl().Url), refererUri).Wait();
             }

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using WebCrawler.Bussiness;
+using WebCrawler.Model;
 
 
 namespace WebCrawler
@@ -12,12 +14,37 @@ namespace WebCrawler
     {
         static void Main(string[] args)
         {
-            var dmzj = new DmzjCrawlerBussiness();
-            dmzj.GetAllChapters();
+            /*var dmzj = new DmzjCrawlerBussiness();
+            dmzj.GetAllChapters();*/
 
+            GetOneChapter();
             //ClearScriptTest.CleaScriptTestMain();
 
             Console.ReadKey();
+        }
+
+        public static void GetOnePicTrue()
+        {
+            var dmzj = new DmzjCrawlerBussiness();
+            var queue = new Queue<NameToUrl>();
+            queue.Enqueue(new NameToUrl
+            {
+                Url = "https://images.dmzj.com/h/%E9%BB%84%E9%87%91%E7%A5%9E%E5%A8%81/%E7%AC%AC03%E8%AF%9D/1-%281%29.png"
+            });
+            NameToUrlManage manage = new NameToUrlManage(queue);
+            dmzj.GetPictures(manage, "https://manhua.dmzj.com/hjsw/37672.shtml", @"E:\Desktop\");
+        }
+
+        public static void GetOneChapter()
+        {
+            var dmzj = new DmzjCrawlerBussiness();
+            var queue = new Queue<NameToUrl>();
+            queue.Enqueue(new NameToUrl
+            {
+                Url = "/hjsw/37569.shtml"
+            });
+            NameToUrlManage manage = new NameToUrlManage(queue);
+            dmzj.GetChapterId(manage);
         }
 
         public static void Test()
