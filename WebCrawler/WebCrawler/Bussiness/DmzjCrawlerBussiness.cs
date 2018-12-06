@@ -26,9 +26,8 @@ namespace WebCrawler.Bussiness
         private static readonly string filePathErrorLog = filePath + @"\ErrorLog.txt";
         private static readonly string pictureMain = "https://images.dmzj.com/";
 
-        public bool GetAllChapters()
+        public bool GetAllChapters(string uri)
         {
-            var uri = firstReferer + @"hjsw/";
             var crawler = new MyCrawler();
             var manager = new NameToUrlManage();
 
@@ -79,6 +78,7 @@ namespace WebCrawler.Bussiness
                 GetChapterId(manager);
             };
             crawler.Start(new Uri(uri), firstReferer).Wait();
+            Console.WriteLine("地址：" + uri + "完成");
             return true;
         }
 

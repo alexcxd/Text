@@ -8,7 +8,7 @@ namespace WebCrawler.Model
         private Queue<NameToUrl> items;
         private object objlock = new object();
 
-        public int Count => items.Count;
+        public int Count { get; set; }
 
         public NameToUrlManage()
         {
@@ -18,6 +18,7 @@ namespace WebCrawler.Model
         public NameToUrlManage(Queue<NameToUrl> urls)
         {
             items = urls;
+            Count = items.Count;
         }
 
         public NameToUrl GetUrl()
