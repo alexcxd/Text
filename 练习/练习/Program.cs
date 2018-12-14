@@ -27,8 +27,8 @@ namespace 练习
         static void Main(string[] args)
         {
             //正则测试
-            EasyRegex easyRegex = new EasyRegex();
-            easyRegex.demo1();
+            /*EasyRegex easyRegex = new EasyRegex();
+            easyRegex.demo1();*/
 
             //数据结构测试
             /*DataStructrueMain dataStructrue = new DataStructrueMain();
@@ -90,7 +90,7 @@ namespace 练习
 
             Console.ReadKey();
         }
-    
+      
     }
 
 }

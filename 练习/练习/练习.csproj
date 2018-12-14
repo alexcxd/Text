@@ -52,6 +52,7 @@
     <Compile Include="DataStructrue\SequenceList\SequenceListMain.cs" />
     <Compile Include="DataStructrue\Stack\HanoiTest.cs" />
     <Compile Include="DataStructrue\Stack\StackMain.cs" />
+    <Compile Include="DataStructrue\String\KmpAlgorithm.cs" />
     <Compile Include="DataStructrue\Tree\TreeMain.cs" />
     <Compile Include="DesignPattern\结构型模式\AdapterPattern.cs" />
     <Compile Include="DesignPattern\结构型模式\BridgePattern.cs" />
