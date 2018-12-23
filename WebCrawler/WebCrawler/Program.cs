@@ -17,23 +17,27 @@ namespace WebCrawler
             var dmzj = new DmzjCrawlerBussiness();
             //dmzj.GetAllChapters("https://manhua.dmzj.com/hjsw");  //黄金神威
             //dmzj.GetAllChapters("https://manhua.dmzj.com/yiquanchaoren/");
-            ClearScriptTest.CleaScriptTestMain();
+            //dmzj.GetAllChapters("https://manhua.dmzj.com/heishihuidcnlnr/?");
 
 
 
+            //ClearScriptTest.CleaScriptTestMain();
+
+
+            //GetOnePictrue();
             //GetOneChapter();
             //ClearScriptTest.CleaScriptTestMain();
 
             Console.ReadKey();
         }
 
-        public static void GetOnePicTrue()
+        public static void GetOnePictrue()
         {
             var dmzj = new DmzjCrawlerBussiness();
             var queue = new Queue<NameToUrl>();
             queue.Enqueue(new NameToUrl
             {
-                Url = "https://images.dmzj.com/h/%E9%BB%84%E9%87%91%E7%A5%9E%E5%A8%81/%E7%AC%AC03%E8%AF%9D/1-%281%29.png"
+                Url = "https://images.dmzj.com/y/一拳超人/真‧第45话_1400671048/14.jpg"
             });
             NameToUrlManage manage = new NameToUrlManage(queue);
             dmzj.GetPictures(manage, "https://manhua.dmzj.com/hjsw/37672.shtml", @"E:\Desktop\");

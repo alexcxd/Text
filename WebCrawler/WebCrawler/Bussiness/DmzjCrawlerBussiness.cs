@@ -51,7 +51,7 @@ namespace WebCrawler.Bussiness
                 {
                     using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
-                        var links = Regex.Match(e.PageSource, "cartoon_online_border[^$]{0,}其它汉化版");
+                        var links = Regex.Match(e.PageSource, @"<div[^>]class=""cartoon_online_border""[^$]*?<div[^>]class=""photo_part""");
                         var urls = Regex.Matches(links.Value,
                             @"<a[^>]+title=""*(?<title>[^>\s]+)""[^>]+href=""*(?<href>[^>\s]+)""\s*[^>]*>[^<]*</a>");
 
@@ -75,6 +75,8 @@ namespace WebCrawler.Bussiness
                         writer.WriteLine("===============================================");
                     }
                 }
+
+                if (manager.Count <= 0) throw new Exception("未爬取到章节地址");
                 GetChapterId(manager);
             };
             crawler.Start(new Uri(uri), firstReferer).Wait();
