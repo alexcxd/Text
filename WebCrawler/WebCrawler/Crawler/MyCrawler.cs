@@ -95,9 +95,10 @@ namespace WebCrawler.Crawler
                         }
                         else
                         {
+                            var charset = response.CharacterSet ?? "utf-8";
                             using (Stream stream = response.GetResponseStream())//原始
                             {
-                                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                                using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(charset)))
                                 {
                                     pageSource = reader.ReadToEnd();
                                 }

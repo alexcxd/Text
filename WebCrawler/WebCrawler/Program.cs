@@ -14,11 +14,13 @@ namespace WebCrawler
     {
         static void Main(string[] args)
         {
-            var dmzj = new DmzjCrawlerBussiness();
+            //var dmzj = new DmzjCrawlerBussiness();
             //dmzj.GetAllChapters("https://manhua.dmzj.com/hjsw");  //黄金神威
             //dmzj.GetAllChapters("https://manhua.dmzj.com/yiquanchaoren/");
-            ClearScriptTest.CleaScriptTestMain();
+            //ClearScriptTest.CleaScriptTestMain();
 
+            var bussiness = new TelephoneNumberHomeBaiduBussiness();
+            bussiness.GetHome();
 
 
             //GetOneChapter();

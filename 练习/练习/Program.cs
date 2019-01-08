@@ -90,7 +90,5 @@ namespace 练习
 
             Console.ReadKey();
         }
-      
     }
-
 }
