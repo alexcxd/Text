@@ -5,6 +5,8 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +24,13 @@ namespace WebCrawler.Crawler
 
         public MyCrawler() { }
 
+        private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        {
+            if (errors == SslPolicyErrors.None)
+                return true;
+            return false;
+        }
+
         public async Task<string> Start(Uri uri, string refererUrl, Dictionary<string, string> specialArguments = null)
         {
             return await Task.Run(() =>
@@ -34,11 +43,21 @@ namespace WebCrawler.Crawler
                 {
                     var sw = new Stopwatch();
                     sw.Start();
-
+                    HttpWebRequest request;
                     //设置报文/创建连接
-                    var request = WebRequest.Create(uri) as HttpWebRequest;
+                    if (uri.ToString().StartsWith("https", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ServicePointManager.ServerCertificateValidationCallback =
+                            new RemoteCertificateValidationCallback(CheckValidationResult);
+                        ServicePointManager.Expect100Continue = true;
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        request = WebRequest.Create(uri) as HttpWebRequest;
+                    }
+                    else
+                    {
+                        request = WebRequest.Create(uri) as HttpWebRequest;
+                    }
                     request.Accept = "*/*";
-                    request.ServicePoint.Expect100Continue = false;
                     request.ServicePoint.UseNagleAlgorithm = false;
                     request.ServicePoint.ConnectionLimit = int.MaxValue;
                     request.AllowAutoRedirect = false;
