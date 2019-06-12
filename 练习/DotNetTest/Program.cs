@@ -12,6 +12,7 @@ using DotNetTest.BugTest;
 using DotNetTest.ClassTest;
 using DotNetTest.DataStructrue;
 using DotNetTest.FileReadAndWrite;
+using DotNetTest.Gather;
 using DotNetTest.Json;
 using DotNetTest.Random;
 using DotNetTest.Reflect;
@@ -19,6 +20,7 @@ using DotNetTest.Test;
 using DotNetTest.ThreadTest;
 using DotNetTest.正则表达式;
 using DotNetTest.访问级别;
+using Test.Gather;
 
 namespace DotNetTest
 {
@@ -78,9 +80,9 @@ namespace DotNetTest
             PointerMain pointerMain = new PointerMain();
             pointerMain.Write();*/
 
-            /*//集合测试
+            //集合测试
             GatherMain gatherMain = new GatherMain();
-            gatherMain.Write();*/
+            gatherMain.Write();
 
             //设计模式
             //DesignPatternMain.Write();
