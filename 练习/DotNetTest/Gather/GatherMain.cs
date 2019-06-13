@@ -14,7 +14,7 @@ namespace DotNetTest.Gather
             //DictionaryTest.DictionaryTest3();
             //HashSetTest.HashSetTest1();
             //ObservableCollectionTest.ObservableCollectionTest1();
-            BitArrayTest.BitArrayTest1();
+            BitArrayTest.BitArrayTest2();
         }
     }
 }

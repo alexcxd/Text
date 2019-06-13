@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.Text;
 
 namespace DotNetTest.Gather
 {
@@ -81,7 +83,48 @@ namespace DotNetTest.Gather
         /// </summary>
         public static void BitArrayTest2()
         {
-            
+            var bv1 = new BitVector32();
+
+            //CreateMask为参数时默认返回1，有参数时返回参数左移一位后的结果
+            //用于创建访问特定位的掩码
+            var bit1 = BitVector32.CreateMask();
+            var bit2 = BitVector32.CreateMask(bit1);
+            var bit3 = BitVector32.CreateMask(bit2);
+            var bit4 = BitVector32.CreateMask(bit3);
+            var bit5 = BitVector32.CreateMask(bit4);
+
+            //[]中的参数为掩码，
+            //若等于true则将掩码和bv中32位二进制进行或操作
+            //若等于false则将掩码和bv中32位二进制进行与操作
+            bv1[bit1] = true;
+            bv1[bit2] = false;
+            bv1[bit3] = true;
+            bv1[bit4] = true;
+            bv1[bit5] = true;
+            Console.WriteLine(bv1);
+
+            //将 0000 0000 0000 0000 0001 1101 和 1010 1011 1100 1101 1110 1111进行或操作
+            bv1[0xabcdef] = true;
+            Console.WriteLine(bv1);
+
+            var received = 0x79abcdef;
+            var bv2 =  new BitVector32(received);
+            Console.WriteLine(bv2);
+
+            //CreateSection用于创建
+            var sectionA = BitVector32.CreateSection(0xfff);
+            var sectionB = BitVector32.CreateSection(0xff, sectionA);
+            var sectionC = BitVector32.CreateSection(0xf, sectionB);
+            var sectionD = BitVector32.CreateSection(0x7, sectionC);
+            var sectionE = BitVector32.CreateSection(0x7, sectionD);
+            var sectionF = BitVector32.CreateSection(0x3, sectionE);
+
+            Console.WriteLine($"SectionA:{IntToBinaryString(bv2[sectionA])}");
+            Console.WriteLine($"SectionB:{IntToBinaryString(bv2[sectionB])}");
+            Console.WriteLine($"SectionC:{IntToBinaryString(bv2[sectionC])}");
+            Console.WriteLine($"SectionD:{IntToBinaryString(bv2[sectionD])}");
+            Console.WriteLine($"SectionE:{IntToBinaryString(bv2[sectionE])}");
+            Console.WriteLine($"SectionF:{IntToBinaryString(bv2[sectionF])}");
         }
 
         public static void DisplayBits(BitArray bitArray)
@@ -93,6 +136,12 @@ namespace DotNetTest.Gather
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// 通过类型位数获得所系数组容量大小
+        /// </summary>
+        /// <param name="n">字节数组长度</param>
+        /// <param name="div">类型长度</param>
+        /// <returns></returns>
         private static int GetArrayLength(int n, int div)
         {
             if (n <= 0)
@@ -100,6 +149,26 @@ namespace DotNetTest.Gather
                 return 0;
             }
             return (n - 1) / div + 1;
+        }
+        
+        /// <summary>
+        /// 将十进制装换为二进制的方法
+        /// </summary>
+        /// <param name="bits">十进制</param>
+        /// <param name="removeTrailingZere">是否移除0</param>
+        /// <returns>二进制</returns>
+        public static string IntToBinaryString(int bits, bool removeTrailingZere = true)
+        {
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < 32; i++)
+            {
+                sb.Append((bits & 0x80000000) != 0 ? "1" : "0");
+                bits = bits << 1; 
+            }
+
+            var s = sb.ToString();
+            return removeTrailingZere ? s.TrimStart('0') : s;
         }
     }
 }
