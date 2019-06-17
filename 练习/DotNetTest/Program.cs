@@ -24,9 +24,9 @@ using Test.Gather;
 
 namespace DotNetTest
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             //正则测试
             /*EasyRegex easyRegex = new EasyRegex();
@@ -81,14 +81,14 @@ namespace DotNetTest
             pointerMain.Write();*/
 
             //集合测试
-            GatherMain gatherMain = new GatherMain();
-            gatherMain.Write();
+            /*GatherMain gatherMain = new GatherMain();
+            gatherMain.Write();*/
 
             //设计模式
             //DesignPatternMain.Write();
 
             //线程测试
-            //TreadMain.Write();
+            TreadMain.Write();
 
             Console.ReadKey();
         }

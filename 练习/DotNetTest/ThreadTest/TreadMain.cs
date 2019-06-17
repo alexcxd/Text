@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DotNetTest.ThreadTest
 {
-    class TreadMain
+    public class TreadMain
     {
         public static void Write()
         {

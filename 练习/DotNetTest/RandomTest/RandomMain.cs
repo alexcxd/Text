@@ -19,14 +19,14 @@ namespace DotNetTest.Random
 
         public static void Write()
         {
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
 
             sw.Start();
-            RandomMain randomMain = new RandomMain();
+            var randomMain = new RandomMain();
             var random = new System.Random(GetRandomSeedbyGuid());
-            StringBuilder str = new StringBuilder();
-            RandomMain rm = new RandomMain();
-            for (int i = 0; i < 7; ++i)
+            var str = new StringBuilder();
+            var rm = new RandomMain();
+            for (var i = 0; i < 7; ++i)
             {
                 str.Append(charList[rm.Demo1(random)]);
             }
@@ -59,7 +59,7 @@ namespace DotNetTest.Random
         /// Random默认使用DateTime.Now.Ticks生成随机数； 
         /// </summary>
         /// 10万6位随机数耗时：6570.0633000000007
-        static int GetRandomSeedbyTicks()
+        public static int GetRandomSeedbyTicks()
         {
             return ~unchecked((int)DateTime.Now.Ticks);
         }
@@ -69,10 +69,10 @@ namespace DotNetTest.Random
         /// </summary>
         /// <returns></returns>
         /// 10万6位随机数耗时：6742.6292
-        static int GetRandomSeedbyGuid()
+        public static int GetRandomSeedbyGuid()
         {
-            byte[] buffer = Guid.NewGuid().ToByteArray();
-            int iSeed = BitConverter.ToInt32(buffer, 0);
+            var buffer = Guid.NewGuid().ToByteArray();
+            var iSeed = BitConverter.ToInt32(buffer, 0);
             return iSeed;
         }
 
@@ -81,9 +81,9 @@ namespace DotNetTest.Random
         /// </summary>
         /// <returns></returns>
         /// 10万6位随机数耗时7171ms
-        static int GetRandomSeed()
+        public static int GetRandomSeed()
         {
-            byte[] bytes = new byte[4];
+            var bytes = new byte[4];
             System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
             rng.GetBytes(bytes);
             return BitConverter.ToInt32(bytes, 0);

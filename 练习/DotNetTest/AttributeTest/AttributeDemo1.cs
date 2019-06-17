@@ -16,7 +16,7 @@ namespace DotNetTest.AttributeTest
         public static void AttributeDemo1Main()
         {
             //反射取出方法或者类的特性
-            MethodInfo info = typeof(ReflectTest).GetMethod("AttributeDemo");
+            var info = typeof(ReflectTest).GetMethod("AttributeDemo");
 
             var attribute = Attribute.GetCustomAttribute(info, typeof(TestAttribute)) as TestAttribute;
 
