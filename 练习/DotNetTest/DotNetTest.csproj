@@ -129,6 +129,7 @@
     <Compile Include="Test\KeyValue.cs" />
     <Compile Include="Test\ObjectToObject.cs" />
     <Compile Include="ThreadTest\AsynDelegate.cs" />
+    <Compile Include="ThreadTest\ParallelTest.cs" />
     <Compile Include="ThreadTest\TaskTest.cs" />
     <Compile Include="ThreadTest\ThreadClass.cs" />
     <Compile Include="ThreadTest\TreadMain.cs" />
