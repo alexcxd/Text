@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace DotNetTest.DesignPattern
 {
+    /// <summary>
+    /// 单例模式
+    /// </summary>
     public class SingletonPattern
     {
         public static void SingletonPatternMain()

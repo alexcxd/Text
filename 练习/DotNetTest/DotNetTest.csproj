@@ -36,6 +36,9 @@
     <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Faker.NET45, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Faker.Net.1.1.1\lib\net452\Faker.NET45.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.10.0.30320\lib\net40\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll</HintPath>
     </Reference>
@@ -52,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdoTest\AdoMainTest.cs" />
+    <Compile Include="AdoTest\BulkCopyTest.cs" />
     <Compile Include="DataStructrue\LinkList\LinkList.cs" />
     <Compile Include="DataStructrue\LinkList\LinkListMain.cs" />
     <Compile Include="DataStructrue\SequenceList\SequenceList.cs" />
@@ -92,6 +97,7 @@
     <Compile Include="DesignPattern\创建型模式\SingletonPattern.cs" />
     <Compile Include="DesignPattern\行为型模式\StatePattern.cs" />
     <Compile Include="DesignPattern\行为型模式\VisitorPattern.cs" />
+    <Compile Include="FakerNet\FakerMain.cs" />
     <Compile Include="FileReadAndWrite\FileReadAndWriteMain.cs" />
     <Compile Include="FileReadAndWrite\WriteTest.cs" />
     <Compile Include="Gather\BitArrayTest.cs" />
@@ -132,6 +138,7 @@
     <Compile Include="ThreadTest\ParallelTest.cs" />
     <Compile Include="ThreadTest\TaskTest.cs" />
     <Compile Include="ThreadTest\ThreadClass.cs" />
+    <Compile Include="ThreadTest\ThreadSynchronous.cs" />
     <Compile Include="ThreadTest\TreadMain.cs" />
     <Compile Include="ThreadTest\TreadPoolTest.cs" />
     <Compile Include="正则表达式\EasyRegex.cs" />

@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace Test.DesignPattern
+namespace DotNetTest.DesignPattern.创建型模式
 {
     /// <summary>
     /// 原型模式

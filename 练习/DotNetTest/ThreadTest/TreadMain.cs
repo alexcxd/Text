@@ -16,6 +16,7 @@ namespace DotNetTest.ThreadTest
             //TreadPoolTest.TreadPoolMain();
             //TaskTest.TaskTestMain();
             //ParallelTest.ParallelTestMain();
+            ThreadSynchronous.ThreadSynchronousMain();
         }
     }
 }

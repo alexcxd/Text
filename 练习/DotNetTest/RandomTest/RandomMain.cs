@@ -22,7 +22,6 @@ namespace DotNetTest.Random
             var sw = new Stopwatch();
 
             sw.Start();
-            var randomMain = new RandomMain();
             var random = new System.Random(GetRandomSeedbyGuid());
             var str = new StringBuilder();
             var rm = new RandomMain();
@@ -55,12 +54,15 @@ namespace DotNetTest.Random
             return num;
         }
 
+        #region 种子
+
         /// <summary>
         /// Random默认使用DateTime.Now.Ticks生成随机数； 
         /// </summary>
         /// 10万6位随机数耗时：6570.0633000000007
         public static int GetRandomSeedbyTicks()
         {
+            //unchecked 关键字用于取消整型类型的算术运算和转换的溢出检查。
             return ~unchecked((int)DateTime.Now.Ticks);
         }
 
@@ -89,6 +91,8 @@ namespace DotNetTest.Random
             return BitConverter.ToInt32(bytes, 0);
 
         }
+
+        #endregion
 
     }
 }

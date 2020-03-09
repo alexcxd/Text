@@ -19,12 +19,12 @@
         /// <returns></returns>
         public static int[] GetNext(string ps)
         {
-            char[] p = ps.ToCharArray();
-            int[] next = new int[p.Length];
+            var p = ps.ToCharArray();
+            var next = new int[p.Length];
 
             next[0] = -1;
-            int j = 0;
-            int k = -1;
+            var j = 0;
+            var k = -1;
 
             while (j < p.Length - 1)
             {

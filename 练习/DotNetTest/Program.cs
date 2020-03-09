@@ -1,9 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using DotNetTest.AdoTest;
 using Microsoft.Win32.SafeHandles;
 using Test.DesignPattern;
 using DotNetTest.AssemblyTest;
@@ -11,6 +20,7 @@ using DotNetTest.AttributeTest;
 using DotNetTest.BugTest;
 using DotNetTest.ClassTest;
 using DotNetTest.DataStructrue;
+using DotNetTest.FakerNet;
 using DotNetTest.FileReadAndWrite;
 using DotNetTest.Gather;
 using DotNetTest.Json;
@@ -20,13 +30,14 @@ using DotNetTest.Test;
 using DotNetTest.ThreadTest;
 using DotNetTest.正则表达式;
 using DotNetTest.访问级别;
+using Newtonsoft.Json;
 using Test.Gather;
 
 namespace DotNetTest
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             //正则测试
             /*EasyRegex easyRegex = new EasyRegex();
@@ -88,9 +99,32 @@ namespace DotNetTest
             //DesignPatternMain.Write();
 
             //线程测试
-            TreadMain.Write();
+            //TreadMain.Write();
 
-            Console.ReadKey();
+            //数据生成
+            //FakerMain.Write();
+
+            //Ado实验
+            //AdoMainTest.Write();
+
+            var client = new HttpClient();
+
+            client.Timeout = TimeSpan.FromMinutes(5);
+
+            for (var i = new DateTime(2020, 02, 02); i <= DateTime.Today; i = i.AddDays(1))
+            {
+                var response = await client.PostAsync("http://localhost:49474/job/dataStatisProduct/saveToDay", new StringContent(JsonConvert.SerializeObject(new
+                {
+                    GeneratedTime = i
+                }), Encoding.UTF8, "application/json"));
+
+                var result = await response.Content.ReadAsByteArrayAsync();
+
+                Console.WriteLine(i.ToString(CultureInfo.InvariantCulture) + " " + result);
+            }
+
+
+            Console.Read();
         }
     }
 }

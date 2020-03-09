@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Test.DesignPattern
+namespace DotNetTest.DesignPattern.结构型模式
 {
     /// <summary>
     /// 装饰器模式1
-    /// </summary
-    /// 动态的给一个对象添加额外的职责，就增加功能来说，它比子类更灵活
+    ///  动态的给一个对象添加额外的职责，就增加功能来说，它比子类更灵活
+    /// </summary>
 
     class DecoratorPattern
     {
