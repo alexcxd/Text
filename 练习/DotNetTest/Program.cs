@@ -105,24 +105,7 @@ namespace DotNetTest
             //FakerMain.Write();
 
             //Ado实验
-            //AdoMainTest.Write();
-
-            var client = new HttpClient();
-
-            client.Timeout = TimeSpan.FromMinutes(5);
-
-            for (var i = new DateTime(2020, 02, 02); i <= DateTime.Today; i = i.AddDays(1))
-            {
-                var response = await client.PostAsync("http://localhost:49474/job/dataStatisProduct/saveToDay", new StringContent(JsonConvert.SerializeObject(new
-                {
-                    GeneratedTime = i
-                }), Encoding.UTF8, "application/json"));
-
-                var result = await response.Content.ReadAsByteArrayAsync();
-
-                Console.WriteLine(i.ToString(CultureInfo.InvariantCulture) + " " + result);
-            }
-
+            AdoMainTest.Write();
 
             Console.Read();
         }

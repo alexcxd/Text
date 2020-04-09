@@ -13,7 +13,7 @@ namespace DotNetTest.AdoTest
 
             var dateTimeFirst = new DateTime(2019, 11, 20);
             var random = new System.Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0));
-            for (var i = 0; i < 2000000; i++)
+            for (var i = 0; i < 1; i++)
             {
                 if (i % 6000 == 0)
                 {
@@ -52,7 +52,7 @@ namespace DotNetTest.AdoTest
 
             orderList = orderList.OrderBy(x => x.AddTime).ToList();
 
-            BulkCopyTest.BulkCopy(orderList);
+            BulkCopyTest.BulkCopy<OrderIndexTest>(orderList);
         }
 
 

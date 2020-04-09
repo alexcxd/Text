@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace DotNetTest.AdoTest
 {
@@ -18,9 +19,11 @@ namespace DotNetTest.AdoTest
             var dt = GetTableSchema1();
             using (var conn = new SqlConnection("server=.;Database=TSQL2012;Integrated Security=SSPI;"))
             {
-                var bulkCopy = new SqlBulkCopy(conn);
-                bulkCopy.DestinationTableName = "OrderIndexTest";
-                bulkCopy.BatchSize = dt.Rows.Count;
+                var bulkCopy = new SqlBulkCopy(conn)
+                {
+                    DestinationTableName = "OrderIndexTest", 
+                    BatchSize = dt.Rows.Count
+                };
                 conn.Open();
                 for (int i = 0; i < datas.Count; i++)
                 {
@@ -70,7 +73,63 @@ namespace DotNetTest.AdoTest
 
             return dt;
         }
-      
+
+        #endregion
+
+        #region 批量新增数据 泛型
+
+
+        /// <summary>
+        /// 批量新增数据
+        /// </summary>
+        public static void BulkCopy<T>(IList<T> datas)
+        {
+            var dt = GetTableSchema1<T>();
+            var type = typeof(T);
+            var fields = type.GetProperties();
+
+            using (var conn = new SqlConnection("server=.;Database=TSQL2012;Integrated Security=SSPI;"))
+            {
+                var bulkCopy = new SqlBulkCopy(conn)
+                {
+                    DestinationTableName = "OrderIndexTest",
+                    BatchSize = dt.Rows.Count
+                };
+                foreach (var filed in fields)
+                {
+                    bulkCopy.ColumnMappings.Add(new SqlBulkCopyColumnMapping(filed.Name, filed.Name));
+                }
+
+                conn.Open();
+                for (var i = 0; i < datas.Count; i++)
+                {
+                    var data = datas[i];
+                    var dr = dt.NewRow();
+
+                    for (var j = 0; j < fields.Length; j++)
+                    {
+                        var filed = fields[j];
+                        var fi = type.GetProperty(filed.Name);
+                        dr[j] = fi.GetValue(data);
+                    }
+                    dt.Rows.Add(dr);
+                }
+                bulkCopy.WriteToServer(dt);
+            }
+        }
+
+        public static DataTable GetTableSchema1<T>()
+        {
+            var dt = new DataTable();
+            var type = typeof(T);
+            var fields = type.GetProperties();
+            foreach (var filed in fields)
+            {
+                dt.Columns.Add(filed.Name, filed.PropertyType);
+            }
+
+            return dt;
+        }
         #endregion
     }
 
