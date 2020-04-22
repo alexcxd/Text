@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.行为型模式
 {
     /// <summary>
     /// 责任链模式

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DotNetTest.DataStructrue
+namespace SampleCode.DataStructrue.Tree
 {
     /// <summary>
     /// 二叉搜索树

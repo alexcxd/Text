@@ -1,10 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Test.DesignPattern;
+using SampleCode.DesignPattern.创建型模式;
 
-namespace SampleCode.Test.DesignPattern
+namespace SampleCode.Test.DesignPattern.创建型模式
 {
     [TestFixture]
     public class BuilderPatternTest

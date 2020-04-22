@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DotNetTest.DataStructrue.SequenceList
+namespace SampleCode.DataStructrue
 {
     /// <summary>
     /// 线性表之顺序表

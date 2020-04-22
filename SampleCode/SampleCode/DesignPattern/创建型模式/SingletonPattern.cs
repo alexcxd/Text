@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.创建型模式
 {
     /// <summary>
     /// 单例模式

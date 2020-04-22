@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.行为型模式
 {
     /// <summary>
     /// 迭代器模式

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.行为型模式
 {
     /// <summary>
     /// 访问者模式

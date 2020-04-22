@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.结构型模式
 {
     public class CompositePattern
     {

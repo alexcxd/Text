@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNetTest.DesignPattern.结构型模式
+namespace SampleCode.DesignPattern.结构型模式
 {
     /// <summary>
     /// 装饰器模式1
@@ -32,7 +32,7 @@ namespace DotNetTest.DesignPattern.结构型模式
     /// <summary>
     /// 对象接口
     /// </summary>
-    public abstract class Component
+    public abstract class DecoratorComponent
     {
         public abstract void Operation();
     }
@@ -40,7 +40,7 @@ namespace DotNetTest.DesignPattern.结构型模式
     /// <summary>
     /// 需要添加功能的对象
     /// </summary>
-    public class ConcreteComponent : Component
+    public class ConcreteComponent : DecoratorComponent
     {
         public override void Operation()
         {
@@ -51,11 +51,11 @@ namespace DotNetTest.DesignPattern.结构型模式
     /// <summary>
     /// 装饰器抽象类
     /// </summary>
-    public abstract class Decorator : Component
+    public abstract class Decorator : DecoratorComponent
     {
-        private Component super;
+        private DecoratorComponent super;
 
-        public Decorator(Component component)
+        public Decorator(DecoratorComponent component)
         {
             super = component;
         }
@@ -75,7 +75,7 @@ namespace DotNetTest.DesignPattern.结构型模式
     /// </summary>
     public class DecoratorA : Decorator
     {
-        public DecoratorA(Component component) : base(component) { }
+        public DecoratorA(DecoratorComponent component) : base(component) { }
         
         public override void Operation()
         {
@@ -89,7 +89,7 @@ namespace DotNetTest.DesignPattern.结构型模式
     /// </summary>
     public class DecoratorB : Decorator
     {
-        public DecoratorB(Component component) : base(component) { }
+        public DecoratorB(DecoratorComponent component) : base(component) { }
 
         public override void Operation()
         {

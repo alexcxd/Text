@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.行为型模式
 {
     /// <summary>
     /// 备忘录模式
@@ -125,7 +123,7 @@ namespace DotNetTest.DesignPattern
         private MyMementoInfo mementoInfo;
         public string State
         {
-            get{ return state; }
+            get => state;
             set
             {
                 if (mementoInfo != null && state != null)

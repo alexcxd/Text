@@ -1,10 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Test.DesignPattern.Factory;
+using SampleCode.DesignPattern.创建型模式.Factory;
 
-namespace SampleCode.Test.DesignPattern.Factory
+namespace SampleCode.Test.DesignPattern.创建型模式.Factory
 {
     public class AbstractFactoryPatternTest
     {

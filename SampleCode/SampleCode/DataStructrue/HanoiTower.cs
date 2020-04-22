@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DotNetTest.DataStructrue.Stack
+namespace SampleCode.DataStructrue
 {
     /// <summary>
     /// hanoi塔

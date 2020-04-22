@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DotNetTest.DesignPattern
+namespace SampleCode.DesignPattern.行为型模式
 {
     /// <summary>
     /// 状态模式
@@ -15,7 +11,7 @@ namespace DotNetTest.DesignPattern
     {
         public static void StatePatternMain()
         {
-            Context context = new Context(new ConcreteStateA());
+            StateContext context = new StateContext(new ConcreteStateA());
             context.Request();
             context.Request();
             context.Request();
@@ -25,12 +21,12 @@ namespace DotNetTest.DesignPattern
 
     public abstract class State
     {
-        public abstract void Handle(Context context);
+        public abstract void Handle(StateContext context);
     }
 
     public class ConcreteStateA : State
     {
-        public override void Handle(Context context)
+        public override void Handle(StateContext context)
         {
             context.State = new ConcreteStateB();
         }
@@ -38,15 +34,15 @@ namespace DotNetTest.DesignPattern
 
     public class ConcreteStateB : State
     {
-        public override void Handle(Context context)
+        public override void Handle(StateContext context)
         {
             context.State = new ConcreteStateA();
         }
     }
 
-    public class Context
+    public class StateContext
     {
-        public Context(State state)
+        public StateContext(State state)
         {
             this.state = state;
         }
@@ -64,7 +60,7 @@ namespace DotNetTest.DesignPattern
 
         public void Request()
         {
-            if(state == null)
+            if (state == null)
             {
                 throw new ArgumentNullException("state");
             }

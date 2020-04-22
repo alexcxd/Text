@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace DotNetTest.DesignPattern.创建型模式
+namespace SampleCode.DesignPattern.创建型模式
 {
     /// <summary>
     /// 原型模式

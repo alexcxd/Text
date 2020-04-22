@@ -1,10 +1,8 @@
-﻿using DotNetTest.DesignPattern;
+﻿using System;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SampleCode.DesignPattern.创建型模式;
 
-namespace SampleCode.Test.DesignPattern
+namespace SampleCode.Test.DesignPattern.创建型模式
 {
     public class SingletonPatternTest
     {
