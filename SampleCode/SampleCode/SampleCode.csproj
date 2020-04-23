@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="DesignPattern\" />
-    <Folder Include="Random\" />
   </ItemGroup>
 
   <ItemGroup>

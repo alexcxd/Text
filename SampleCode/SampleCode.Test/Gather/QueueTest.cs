@@ -55,7 +55,7 @@ namespace SampleCode.Test.Gather
             {
                 dm.AddDocument(new Document("Document" + i, "content"));
                 Console.WriteLine($"Added document {"Document" + i}");
-                Thread.Sleep(new Random().Next(20));
+                Thread.Sleep(new System.Random().Next(20));
             }
         }
     }
@@ -119,7 +119,7 @@ namespace SampleCode.Test.Gather
                     var document = _documentManager.GetDocument();
                     Console.WriteLine($"Process document:{document.Title}");
                 }
-                Thread.Sleep(new Random().Next(200));
+                Thread.Sleep(new System.Random().Next(200));
             }
         }
     }

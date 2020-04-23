@@ -15,8 +15,8 @@ namespace DotNetTest.Reflect
             Type intType2 = intType.GetType();
 
             //2.属性
-            /*//判断类型
-            Console.WriteLine(inType.IsValueType);
+            //判断类型
+            /*Console.WriteLine(inType.IsValueType);
             Console.WriteLine(inType.IsAbstract);
             Console.WriteLine(inType.IsEnum);
             Console.WriteLine(inType.IsPrimitive);
