@@ -13,10 +13,10 @@ namespace DotNetTest.ThreadTest
         {
             //AsynDelegate.AsynDelegateMain();
             //ThreadClass.ThreadClassMain();
-            //TreadPoolTest.TreadPoolMain();
+            TreadPoolTest.TreadPoolMain();
             //TaskTest.TaskTestMain();
             //ParallelTest.ParallelTestMain();
-            ThreadSynchronous.ThreadSynchronousMain();
+            //ThreadSynchronous.ThreadSynchronousMain();
         }
     }
 }

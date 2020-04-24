@@ -31,7 +31,7 @@ namespace DotNetTest.正则表达式
             Console.WriteLine("2:" + isPhone);
 
             //3.身份证号码
-            patt = "^\\d{18}$";
+            patt = @"^\d{18}$";
             bool isCard = Regex.IsMatch("111111111111111111", patt);
             Console.WriteLine("3:" + isCard);
             //4.验证是否为合法的邮件地址 24@qq

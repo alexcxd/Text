@@ -2,33 +2,32 @@
 using System.IO;
 using System.Text;
 using System.Threading;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 
-namespace DotNetTest.ThreadTest
+namespace SampleCode.Test.MultiThread
 {
     /// <summary>
     /// 线程池
     /// 线程池中所有的线程默认为后台线程，优先级为Normal 
     /// </summary>
+    [TestFixture]
     public class TreadPoolTest
     {
-        public static  void TreadPoolMain()
-        {
-            TreadPoolTest1();
-            //TreadPoolTest2();
-        }
         /// <summary>
         /// 基本用法
         /// </summary>
-        private static void TreadPoolTest1()
+        [Test]
+        public void TreadPoolCodeTest()
         {
             //获取最大工作线程和最大I/O线程的数量
             ThreadPool.GetMaxThreads(out int nWorkerThreads, out int nCompletionPortThreads);
 
             //设置最大线程
-            ThreadPool.SetMaxThreads(1100,1100);
+            ThreadPool.SetMaxThreads(1100, 1100);
 
             //设置最少保留线程
-            ThreadPool.SetMinThreads(100,100);
+            ThreadPool.SetMinThreads(100, 100);
 
             for (var i = 0; i < 5; i++)
             {
@@ -56,13 +55,13 @@ namespace DotNetTest.ThreadTest
             }
         }
 
-
         /// <summary>
         /// 利用ThreadPool调用工作线程和IO线程的范例
         /// 工作线程是指在CLR中运作的线程，主要进行计算密集的任务
         /// IO线程是指与外部系统交互信息的线程
         /// </summary>
-        private static void TreadPoolTest2()
+        [Test]
+        public void TreadPoolTest2()
         {
             ThreadPool.GetMaxThreads(out int nWorkerThreads, out int nCompletionPortThreads);
             Console.WriteLine($"最大工作线程为：{nWorkerThreads},最大IO线程为：{nCompletionPortThreads}");
@@ -73,14 +72,13 @@ namespace DotNetTest.ThreadTest
             //调用工作线程
             ThreadPool.QueueUserWorkItem(AsyncMethod);
 
-            var stream = new FileStream("D:\\1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite,
+            var stream = new FileStream(@"D:\Desktop\1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite,
                 1024, true);
             //这里要注意，如果写入的字符串很小，则.Net会使用辅助线程(后台线程)写，因为这样比较快
             var bytes = Encoding.UTF8.GetBytes("你在他乡还好吗？");
             //异步写入开始，倒数第二个参数指定回调函数，最后一个参数将自身传到回调函数里，用于结束异步线程
             stream.BeginWrite(bytes, 0, bytes.Length, Callback, stream);
             PrintThreadMessage("AsyncReadFile Method");
-
         }
 
         public static void AsyncMethod(object obj)
@@ -101,6 +99,7 @@ namespace DotNetTest.ThreadTest
             stream.Flush();
             stream.Close();
         }
+
         public static void PrintThreadMessage(string data)
         {
             ThreadPool.GetAvailableThreads(out int nWorkerThreads, out int nCompletionPortThreads);
