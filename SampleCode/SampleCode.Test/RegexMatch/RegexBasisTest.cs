@@ -7,6 +7,7 @@ namespace SampleCode.Test.RegexMatch
 {
     /// <summary>
     /// 正则表达式基础
+    /// 完整正则表达式语法特性 见C#7.0核心技术指南26.7
     /// </summary>
     [TestFixture]
     public class RegexBasisTest
@@ -35,6 +36,21 @@ namespace SampleCode.Test.RegexMatch
         // {n}          n次匹配
         // {n,}         至少n次匹配
         // {n,m}        n到m次匹配
+
+        #endregion
+
+        #region RegexOptions属性
+
+        // 枚举值                  正则表达式选项字母  介绍
+        // IgnoreCase              i                   忽略大小写(默认情况下是区分大小写的)
+        // Multiline               m                   修改^和$的语义，使其匹配一行的开始和结尾
+        // ExplicitCapture         n                   捕获显式命名或显示指定编号的组 详见分组
+        // Compiled                                    强制将正则表达式编译为IL代码
+        // SingleLine              s                   确保.符号匹配所有字符(包括\n)
+        // IgnorePatternWitespace  x                   忽略所有未转义的空白字符串
+        // RightToLeft             r                   从右向左搜索, 无法在表达式的中间应用该选项
+        // ECMAScript                                  强制符合ECMA标准
+        // CultureInvariant                            在字符串比较时不使用文化相关的比较规则
 
         #endregion
 
@@ -187,6 +203,52 @@ namespace SampleCode.Test.RegexMatch
         [Test]
         public void RegexReplace()
         {
+            //Regex.Replace方法可以替换匹配结果
+            //例如将单词cat替换为dog
+            Console.WriteLine(Regex.Replace("catapult the cat", @"\bcat\b", @"dog"));   //catapult the dog
+
+            //替换字符串可以通过$0作为替换结构访问原始的匹配
+            //例如将所有数字都加上尖括号
+            Console.WriteLine(Regex.Replace("10 puls 20 makes 30", @"\d+", @"<$0>"));   //<10> puls <20> makes <30>
+
+            //通过$1,$2,$3以此类推的方式捕获任意分组
+            Console.WriteLine(Regex.Replace("10 puls 20 makes 30", @"(\d+) (\b\w+\b)", @"<$1> ($2)"));   //<10> (puls) <20> (makes) 30
+
+            //通过分组的命名捕获任意分组
+            Console.WriteLine(Regex.Replace(
+                "<msg>Hello</msg>", 
+                @"<(?<tag>\w+?)>(?<text>.*?)</(\k'tag')>", 
+                @"<${tag} value = $""{text}""/>"));            //< msg value = "Hello"/>
+
+            //MatchEvaluator委托
+            //在Regex.Replace中通过MatchEvaluator委托实现对匹配结果的逻辑替换
+            Console.WriteLine(Regex.Replace("5 is less then 10", @"\d+", x => ((int.Parse(x.Value) * 10)).ToString())); //50 is less then 100
+        }
+
+        #endregion
+
+        #region 拆分
+
+        /// <summary>
+        /// 正则表达式-拆分基本
+        /// </summary>
+        [Test]
+        public void RegexSplitTest()
+        {
+            //Regex.Split可以通过正则表达式来表示分隔符, 其中结果中不会包含间隔符
+            var strList = Regex.Split("a5e3q", @"\d");
+            foreach(var str in strList)
+            {
+                Console.Write(str + " ");
+            }
+
+            //若需要将间隔符包含结果中, 可以将表达式放入正前向条件中
+            //例如，将使用驼峰命名法的字符串分割为单词
+            var strList1 = Regex.Split("oneTwoThree", @"(?=[A-Z])");
+            foreach (var str in strList1)
+            {
+                Console.Write(str + " ");
+            }
 
         }
 
