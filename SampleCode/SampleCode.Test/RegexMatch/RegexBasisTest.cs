@@ -47,7 +47,7 @@ namespace SampleCode.Test.RegexMatch
         // ExplicitCapture         n                   捕获显式命名或显示指定编号的组 详见分组
         // Compiled                                    强制将正则表达式编译为IL代码
         // SingleLine              s                   确保.符号匹配所有字符(包括\n)
-        // IgnorePatternWitespace  x                   忽略所有未转义的空白字符串
+        // IgnorePatternWhitespace  x                   忽略所有未转义的空白字符串
         // RightToLeft             r                   从右向左搜索, 无法在表达式的中间应用该选项
         // ECMAScript                                  强制符合ECMA标准
         // CultureInvariant                            在字符串比较时不使用文化相关的比较规则

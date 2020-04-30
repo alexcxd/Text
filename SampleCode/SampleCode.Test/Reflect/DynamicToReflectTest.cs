@@ -32,7 +32,7 @@ namespace SampleCode.Test.Reflect
             sw.Start();
 
             //使用dynamic可以省去了频繁的类型转换操作。
-            int i = 1000000;
+            var i = 1000000;
             while (i > 0)
             {
                 /*//Assembly.Load("Lib") 加载的程序集（即要创建的对象类型在哪个程序集中定义）

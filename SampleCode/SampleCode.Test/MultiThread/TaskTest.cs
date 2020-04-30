@@ -8,6 +8,9 @@ using NUnit.Framework.Internal;
 
 namespace SampleCode.Test.MultiThread
 {
+    /// <summary>
+    /// 任务
+    /// </summary>
     [TestFixture]
     public class TaskTest
     {

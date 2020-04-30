@@ -12,26 +12,12 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using DotNetTest.AdoTest;
 using Microsoft.Win32.SafeHandles;
-using Test.DesignPattern;
 using DotNetTest.AssemblyTest;
 using DotNetTest.AttributeTest;
-using DotNetTest.BugTest;
-using DotNetTest.ClassTest;
-using DotNetTest.DataStructrue;
-using DotNetTest.FakerNet;
-using DotNetTest.FileReadAndWrite;
-using DotNetTest.Gather;
 using DotNetTest.Json;
-using DotNetTest.Random;
-using DotNetTest.Reflect;
-using DotNetTest.Test;
 using DotNetTest.ThreadTest;
-using DotNetTest.正则表达式;
-using DotNetTest.访问级别;
 using Newtonsoft.Json;
-using Test.Gather;
 
 namespace DotNetTest
 {

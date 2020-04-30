@@ -12,11 +12,6 @@ namespace DotNetTest.ThreadTest
         public static void Write()
         {
             //AsynDelegate.AsynDelegateMain();
-            //ThreadClass.ThreadClassMain();
-            TreadPoolTest.TreadPoolMain();
-            //TaskTest.TaskTestMain();
-            //ParallelTest.ParallelTestMain();
-            //ThreadSynchronous.ThreadSynchronousMain();
         }
     }
 }

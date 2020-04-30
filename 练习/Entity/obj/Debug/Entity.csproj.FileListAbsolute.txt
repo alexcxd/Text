@@ -17,6 +17,6 @@ E:\Desktop\github\练习\Entity\obj\Debug\Entity.dll
 E:\Desktop\github\练习\Entity\obj\Debug\Entity.pdb
 D:\Desktop\cxd\test\Text\练习\Entity\bin\Debug\Entity.dll
 D:\Desktop\cxd\test\Text\练习\Entity\bin\Debug\Entity.pdb
-D:\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.csprojAssemblyReference.cache
 D:\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.dll
 D:\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.pdb
+D:\Desktop\cxd\test\Text\练习\Entity\obj\Debug\Entity.csprojAssemblyReference.cache
