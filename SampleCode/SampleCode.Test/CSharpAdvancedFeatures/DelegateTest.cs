@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
-using System;
+﻿using System;
+using NUnit.Framework;
 
-namespace SampleCode.Test.Delegates
+namespace SampleCode.Test.CSharpAdvancedFeatures
 {
     public delegate int Transformer(int x);
     public delegate T Transformer<T>(T x);
