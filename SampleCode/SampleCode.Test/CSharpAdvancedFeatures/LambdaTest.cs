@@ -83,9 +83,6 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
             var natural2 = Natural2();
             Console.WriteLine(natural2());   //0
             Console.WriteLine(natural2());   //0
-
-            //捕获迭代变量
-
         }
     }
 }
