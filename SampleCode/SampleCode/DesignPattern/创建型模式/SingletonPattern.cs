@@ -86,8 +86,10 @@ namespace SampleCode.DesignPattern.创建型模式
             {
                 lock (objlock)
                 {
-                    instanse = new Singleton();
-
+                    if (instanse == null)
+                    {
+                        instanse = new Singleton();
+                    }
                 }
             }
             return instanse;
