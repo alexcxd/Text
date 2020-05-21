@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
 using NUnit.Framework;
@@ -58,7 +59,7 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
         /// 动态绑定 异常
         /// </summary>
         [Test]
-        public void DynamicBindingException()
+        public void DynamicBindingExceptionTest()
         {
             //如果成员绑定失败, 会抛出RuntimeBinderException异常
             dynamic d = 5;
@@ -69,7 +70,7 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
         /// 动态绑定 动态类型的运行时表示
         /// </summary>
         [Test]
-        public void DynamicBindingRuntime()
+        public void DynamicBindingRuntimeTest()
         {
             //dynamic和object之间有深度的等价关系, 在运行时typeof(dynamic) == typeof(object)为true
             //动态引用和对象引用类型, 都可以指向除指针以外的任何类型的对象
@@ -84,7 +85,8 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
             d.Append("Hello");
             Console.WriteLine(d);   //Hello
 
-            //如果在一个提供了公开的dynamic成员的类型上使用反射, 会发现这些成员都是标记了特性的object
+            //如果在一个提供了公开的dynamic成员的类型上使用反射,
+            //会发现这些成员都是标记了特性DynamicAttribute的object
             var type = typeof(PublicDynamicTest);
             var properties = type.GetProperties();
             foreach (var propertie in properties)
@@ -101,9 +103,71 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
         /// 动态绑定 动态转换
         /// </summary>
         [Test]
-        public void DynamicBindingConversion()
+        public void DynamicBindingConversionTest()
         {
+            //动态类型可以隐式从其他类型转换或转换为其他类型
+            //若i无法转化为l会报RunTimeBinderException
+            int i = 7;
+            dynamic d = i;
+            long l = d;
+        }
 
+        static void Foo(object x, object y) { Console.WriteLine("oo"); }
+        static void Foo(object x, string y) { Console.WriteLine("os"); }
+        static void Foo(string x, object y) { Console.WriteLine("so"); }
+        static void Foo(string x, string y) { Console.WriteLine("ss"); }
+
+        /// <summary>
+        /// 动态绑定 动态表达式
+        /// </summary>
+        [Test]
+        public void DynamicBindingExpressionTest()
+        {
+            //包含动态的类型的表达式被称为动态表达式
+
+            //如果动态表达式的返回值为void, 那么它的结果是不能使用的,
+            //若尝试使用会报运行时异常
+            dynamic list = new List<int>();
+            //var result = list.Add(1); //RunTimeBinderException
+
+            //动态表达式的动态一般是会向下传递，
+            dynamic x = 2;
+            var y = x * 3;  //类型为dynamic
+            //不会向下传递的两种情况
+            //1.将动态类型转换为静态类型
+            var z = (int)x;
+            //2.构造函数的调用
+            var sb = new StringBuilder(x);
+
+            //动态表达式中的静态变量
+            //Foo的调用是动态绑定, 本例中重载解析器会调用第二个Foo,
+            //原因在于编译器会尽可能的静态化, 即选择最接近的类型静态化
+            object o = "1";
+            dynamic d = "2";
+            Foo(o, d);  //os
+        }
+
+        /// <summary>
+        /// 动态绑定 不可调用的函数
+        /// </summary>
+        [Test]
+        public void DynamicBindingNotCallTest()
+        {
+            //动态绑定需要两部分信息：调用的函数名和调用该函数的对象
+            //因此在运行时无法获取到上述信息的情况将无法调用
+
+            //1.扩展方法(通过扩展方法的语法) 无法理解
+            string s = "aaa";
+            s.Test();
+
+            //2.必须将接口转换为接口才能调用的接口成员
+            IFoo f = new Foo();
+            f.Test();
+            dynamic d = f; 
+            Console.WriteLine(d.GetType());
+            //d.Test();   //RuntimeBinderException 
+
+            //3.基类被子类隐藏的成员
         }
     }
 
@@ -126,4 +190,13 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
     {
         public dynamic Foo { get; set; }
     }
+
+    public static class DynamicHelper
+    {
+        public static void Test(this string s) { Console.WriteLine(s); }
+    }
+
+    interface IFoo { void Test();}
+    class Foo : IFoo { void IFoo.Test() { } }
+
 }
