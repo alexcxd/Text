@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SampleCode.Random
+namespace SampleCode.Math
 {
     public class RandomHelper
     {
@@ -34,7 +34,7 @@ namespace SampleCode.Random
         {
             var str = new StringBuilder();
 
-            charList = charList ?? CharList;
+            charList ??= CharList;
 
             for (var i = 0; i < charCount; ++i)
             {

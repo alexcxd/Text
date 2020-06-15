@@ -7,9 +7,9 @@ using NUnit.Framework;
 namespace SampleCode.Test.Gather
 {
     /// <summary>
-    ///队列测试
-    /// </summary>
+    /// 队列测试
     /// 先进先出的列表
+    /// </summary>
     public class QueueTest
     {
         /// <summary>

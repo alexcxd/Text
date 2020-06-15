@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace SampleCode.Test.Gather
@@ -7,14 +9,13 @@ namespace SampleCode.Test.Gather
     public class ListTest
     {
         /// <summary>
-        /// 集合基本操作
+        /// List基本操作
         /// </summary>
         [Test]
         public void ListCodeTest()
         {
             //列表初始化容量为4个元素，每次超出容量都会翻倍
             //当容量发生改变时，整个集合就要重新分配到一个新的内存块中
-
 
             //设置初始容量
             List<int> intList = new List<int>(10);
@@ -84,6 +85,24 @@ namespace SampleCode.Test.Gather
 
             //只读集合,所有修改集合的方法和属 性都抛出NotsuppoHedException异常。
             var onlyReadList = racers.AsReadOnly();
+
+        }
+
+        /// <summary>
+        /// ArrayList基本操作
+        /// </summary>
+        [Test]
+        public void ArrayList()
+        {
+            //ArrayList是List<T>的非泛型实现, 类似List<object>, 主要用途是向后兼容Framework 1.X的代码
+            //当T为值类型的时候, List<T>的速度会比ArrayList快好几倍(不必频繁的装箱拆箱)
+            var a1 = new ArrayList();
+            a1.Add("hello");
+            var first = (string) a1[0];
+            string[] strArr = (string[]) a1.ToArray(typeof(string));
+
+            //可以使用Cast再调用ToList将一个ArrayList转换为泛型List
+            var a2 = a1.Cast<string>().ToList();
         }
     }
 

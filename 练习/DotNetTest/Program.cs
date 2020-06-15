@@ -85,13 +85,29 @@ namespace DotNetTest
             //DesignPatternMain.Write();
 
             //线程测试
-            TreadMain.Write();
+            //TreadMain.Write();
 
             //数据生成
             //FakerMain.Write();
 
             //Ado实验
             //AdoMainTest.Write();
+
+            var a = new
+            {
+                ProductId = 21,
+                Name = "agdk"
+            };
+
+            var b = JsonConvert.SerializeObject(a);
+
+            var c = new
+            {
+                A = a,
+                Id= 1
+            };
+
+            var d = JsonConvert.SerializeObject(c);
 
             Console.Read();
         }

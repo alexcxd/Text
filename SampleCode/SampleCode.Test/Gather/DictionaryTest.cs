@@ -18,6 +18,8 @@ namespace SampleCode.Test.Gather
         [Test]
         public void DictionaryCodeTest()
         {
+            //Dictionary使用散列表存储数据
+
             var dictionary = new Dictionary<DictionaryKey, string>();
 
             //插入
@@ -74,10 +76,10 @@ namespace SampleCode.Test.Gather
         [Test]
         public void SortedDictionaryTest()
         {
-            //有序字典是一个二叉搜索树(二叉查找树)
+            //有序字典是通过红黑树实现的
             //有序字典的键必须实现IComparable<TKey>接口，
             //如果未实现可以创建一个实现IComparable<TKey>接口的比较器作为SortedDictionary构造函数的参数
-            //SortedDictionary相比于SortedList的内存多，但是插入和删除的速度更快
+            //SortedDictionary在随机序列中插入元素的速度比SortedList快的多
             var sortedDictionary = new SortedDictionary<SortedDictionaryKey, string>();
             sortedDictionary.Add(new SortedDictionaryKey("BBB"), "BBB1");
             sortedDictionary.Add(new SortedDictionaryKey("AAA"), "AAA1");

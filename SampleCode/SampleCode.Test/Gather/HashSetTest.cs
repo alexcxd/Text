@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace SampleCode.Test.Gather
@@ -6,11 +7,16 @@ namespace SampleCode.Test.Gather
     public class HashSetTest
     {
         /// <summary>
-        /// 集：包含不重复的集合
+        /// HashSet：不重复的集合
         /// </summary>
         [Test]
         public void HashSetCodeTest()
         {
+            //HashSet的特点: 1. 它的Contains方法均使用散列查找因此执行速度很快
+            //               2. 它不会保存重复的元素, 并且会忽视重复值的请求
+            //               3. 无法根据为位置访问元素
+            //HastSet是通过使用存储键的散列表实现
+
             var alphabets1 = new HashSet<string> { "A", "V", "R", "Q" };
             var alphabets2 = new HashSet<string> { "A", "T", "R", "B" };
             var alphabets3 = new HashSet<string> { "A", "V" };
@@ -48,6 +54,30 @@ namespace SampleCode.Test.Gather
             alphabets1 = new HashSet<string> { "A", "V", "R", "Q" };
             alphabets2 = new HashSet<string> { "A", "T", "R", "B" };
             alphabets1.IntersectWith(alphabets2);
+        }
+
+
+        /// <summary>
+        /// SortedSet：有序的不重复的集合
+        /// </summary>
+        [Test]
+        public void SortedSetCodeTest()
+        {
+            //SortedSet是有序的HashSet, 
+            //SortedSet是通过一个红黑树实现的
+            var letters = new SortedSet<char>("the quick brown fox");
+            foreach (var letter in letters)
+            {
+                Console.Write(letter);
+            }
+            Console.WriteLine();
+
+            //可以通过GetViewBetween获取指定范围的结果
+            foreach (var letter in letters.GetViewBetween('f', 'j'))
+            {
+                Console.Write(letter);
+            }
+            Console.WriteLine();
         }
     }
 }

@@ -20,6 +20,9 @@ namespace SampleCode.Test.Gather
         [Test]
         public void BitArrayCodeTest()
         {
+            //BitArray是一个压缩保存bool值的可动态调整大小的集合
+            //由于它使用一位(而不是一般的一个字节)来存储bool值, 因此比起bool数组或者List<bool>具有更高的内存使用率
+
             var bitArray1 = new BitArray(16);
             bitArray1.SetAll(true);
             bitArray1.Set(1, false);

@@ -5,7 +5,7 @@ namespace SampleCode.Test.Gather
     public class LinkedListTest
     {
         /// <summary>
-        /// 链表基本操作
+        /// 双向链表基本操作
         /// </summary>
         public void LinkedListCodeTest()
         {
