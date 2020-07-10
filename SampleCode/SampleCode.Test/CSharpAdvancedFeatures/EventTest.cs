@@ -22,7 +22,7 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
             //2.清除所有委托(将委托设置未null)
             //3.通过调用其委托广播到其他订阅者
             var stock = new Stock("Product1");
-            static void PriceChange(decimal oldPrice, decimal newPrice) => Console.WriteLine("Change");
+            static void PriceChange(decimal oldPrice, decimal newPrice) => Console.WriteLine($"Change {oldPrice}");
             stock.PriceChange += PriceChange;
             stock.Price = 10;
             stock.PriceChange -= PriceChange;

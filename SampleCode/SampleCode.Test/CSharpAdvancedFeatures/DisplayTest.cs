@@ -105,5 +105,45 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
         }
 
         #endregion
+
+        #region 在终结器中调用Display方法
+
+        /// <summary>
+        /// 在终结器中调用Display方法
+        /// </summary>
+        [Test]
+        public void DisplayInFinalizersTest()
+        {
+            //在终结器中调用Display方法是一种常用的模式, 这个模式通常在消费者忘记调用Dispose方法时作为补救
+        }
+
+        public class Test : IDisposable
+        {
+            ~Test()
+            {
+                Dispose(false);
+            }
+
+            public void Dispose()
+            {
+                Dispose(true);
+
+                //为了防止垃圾回收器在之后回收这个对象时执行终结器
+                GC.SuppressFinalize(this);
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    //在此实例拥有的其他对象上调用Dispose()。
+                    //您可以在这里引用其他可终结的对象
+                }
+
+                //释放该对象拥有的非托管资源。
+            }
+        }
+
+        #endregion
     }
 }

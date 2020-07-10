@@ -1,3 +1,6 @@
+using System;
+using System.Diagnostics;
+using System.Threading;
 using NUnit.Framework;
 
 namespace SampleCode.Test
@@ -12,7 +15,8 @@ namespace SampleCode.Test
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+           
         }
+
     }
 }
