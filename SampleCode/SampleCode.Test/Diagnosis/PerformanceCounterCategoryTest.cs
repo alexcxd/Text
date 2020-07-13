@@ -12,6 +12,11 @@ namespace SampleCode.Test.Diagnosis
     [TestFixture]
     public class PerformanceCounterCategoryTest
     {
+        /*
+         * 性能计数器是用于监视基础结构，它是由一系列系统或应用程序公开的
+         * 性能计数器按照"System(系统)"、"Processor(处理器)"、".NET CLR Memory(.NET CLR内存)"等类别分组
+         */
+
         #region 获取所有可用的性能计数器
 
         /// <summary>

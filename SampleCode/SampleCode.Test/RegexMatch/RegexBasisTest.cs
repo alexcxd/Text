@@ -90,7 +90,7 @@ namespace SampleCode.Test.RegexMatch
             Console.WriteLine(Regex.IsMatch("what?", @"what\?") + "," + Regex.IsMatch("what?", @"what?"));
             //可以使用Regex.Escape将元字符的字符串替换为转义形式，Regex.Unescape方法相反
             Console.WriteLine("Escape:" + Regex.Escape(@"?"));      //\?
-            Console.WriteLine("Unescape:" + Regex.Escape(@"\?"));   // ?
+            Console.WriteLine("Unescape:" + Regex.Unescape(@"\?"));   // ?
 
             //懒惰量词符号和贪婪量词符号
             //默认情况下量词都是贪婪的
