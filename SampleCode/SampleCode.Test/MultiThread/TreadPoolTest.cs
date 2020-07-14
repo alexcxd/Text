@@ -20,6 +20,11 @@ namespace SampleCode.Test.MultiThread
         [Test]
         public void TreadPoolCodeTest()
         {
+            //线程池
+            //线程池中的线程Name属性是无法设置的
+            //线程池中的线程都是后台线程
+            //阻塞线程池中的线程会影响性能
+
             //获取最大工作线程和最大I/O线程的数量
             ThreadPool.GetMaxThreads(out int nWorkerThreads, out int nCompletionPortThreads);
 
@@ -28,6 +33,9 @@ namespace SampleCode.Test.MultiThread
 
             //设置最少保留线程
             ThreadPool.SetMinThreads(100, 100);
+
+            //Thread.CurrentThread.IsThreadPoolThread可用于确认当前运行的线程是否为线程池线程
+            var a = Thread.CurrentThread.IsThreadPoolThread;
 
             for (var i = 0; i < 5; i++)
             {

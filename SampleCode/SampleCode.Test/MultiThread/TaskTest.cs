@@ -14,28 +14,29 @@ namespace SampleCode.Test.MultiThread
     [TestFixture]
     public class TaskTest
     {
+        #region 启动任务
+
         /// <summary>
-        /// 任务基本功能
+        /// 启动任务
         /// </summary>
         [Test]
-        public void TaskCodeTest()
+        public void RunTaskTest()
         {
-            //任务的创建和启动
-            //方法一：传入Action<object>
-            new Task(StartCode, 1).Start();
+            //任务默认使用线程池中的线程, 因此都是后台线程
+            //但是也可以通过传递TaskCreationOptions.LongRunning参数请求一个非线程池线程
 
-            //方法二：使用lamada表达式
+            //方法一: Task构造器
             var task1 = new Task<int>(x => Sum((int)x), 10000);
             task1.Start();
+            //Wait方法阻塞当前线程, 和Thread.Join类似
             task1.Wait();
             Console.WriteLine($"task1结果：{task1.Result}");
 
-            //方法三：使用TaskFactory
-            var tf = new TaskFactory();
-            tf.StartNew(StartCode, 2);
-
-            //方法四：使用Task.Factory
+            //方法二: Task工厂
             var task2 = Task.Factory.StartNew(StartCode, 3);
+
+            //方法三: Task静态方法
+            var task3 = Task.Run(() => Console.WriteLine("Foo"));
 
             //任务的状态 
             //任务的枚举为TaskStatus
@@ -53,29 +54,100 @@ namespace SampleCode.Test.MultiThread
             }
         }
 
+        private static void StartCode(object i)
+        {
+            Console.WriteLine($"开始执行任务-{i}");
+            Thread.Sleep(1000);
+        }
+
+
+        #endregion
+
+        #region 异常
+
         /// <summary>
-        /// 连续的任务
+        /// 异常
         /// </summary>
         [Test]
-        public void TaskContinueWithTest()
+        public void TaskExceptionTest()
         {
-            var t = new Task<int>(x => Sum((int)x), 10000);
+            //如果任务中抛出一个未处理的异常, 那么调用Wait或者访问时, 异常会被重新抛出(其中异常会被包装为AggregateException)
+            var task1 = Task.Run(() => { throw new ArgumentNullException(); });
+            try
+            {
+                task1.Wait();
+            }
+            catch (AggregateException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            //使用Task的IsFaulted和IsCanceled属性可以在不抛出异常的情况下检测出错的任务
+            //如果IsCanceled为true则说明任务已取消, 抛出了OperationCanceledException
+            //如果IsFaulted为true则说明任务抛出了其他异常
+            var isFaulted = task1.IsFaulted;
+
+            //异常和自治的任务
+            //自治任务指的是那些不需要调用Wait()或访问其Result, 也不需要进行延续的任务
+            //在自治任务中抛出的异常称为被称为未观测异常
+            //可以使用TaskScheduler.UnobservedTaskException在全局范围订阅未观测异常
+            TaskScheduler.UnobservedTaskException += (sender, args) =>
+            {
+
+            };
+
+        }
+
+        #endregion
+
+        #region 延续
+
+        /// <summary>
+        /// 延续
+        /// </summary>
+        [Test]
+        public void TaskContinueTest()
+        {
+            //延续是指通过回调方法的形式告诉任务在完成之后需要继续执行的任务
+
+            //方式一 Awaiter
+            var task1 = Task.Run(() => Enumerable.Range(2, 3000000).Count(x =>
+                Enumerable.Range(2, (int)System.Math.Sqrt(x) - 1).All(y => x % y > 0)));
+
+            var awaiter = task1.GetAwaiter();
+            //OnCompleted告知先导任务当它执行完毕(或抛出异常)时调用一个委托
+            awaiter.OnCompleted(() =>
+            {
+                //如果先导任务抛出异常, 则awaiter.GetResult()也会将异常重新抛出
+                //重新抛出的异常不会被AggregateException包装
+                //对于非泛型的任务, GetResult的返回值为void
+                var result = awaiter.GetResult();
+                Console.WriteLine(result);
+                Console.WriteLine("----------");
+            });
+
+            task1.Wait();
+
+            //方式二 ContinueWith
+            //ContinueWith会返回一个Task, 非常适合添加复数的延续
+            //如果希望延续任务和先导任务在同一线程上执行, 需要指定TaskContinuationOptions.ExecuteSynchronously
+            var task2 = new Task<int>(x => Sum((int)x), 10000);
 
             //正常运行时走这个
-            t.ContinueWith(x => Console.WriteLine($"The result is {x.Result}"),
+            task2.ContinueWith(x => Console.WriteLine($"The result is {x.Result}"),
                 TaskContinuationOptions.OnlyOnRanToCompletion);
 
             //报错时走这个
-            t.ContinueWith(x => Console.WriteLine($"result Throw {x.Exception}"), 
+            task2.ContinueWith(x => Console.WriteLine($"result Throw {x.Exception}"),
                 TaskContinuationOptions.OnlyOnFaulted);
 
             //取消时走这个
-            t.ContinueWith(x => Console.WriteLine($"result was cancel {x.IsCanceled}"),
+            task2.ContinueWith(x => Console.WriteLine($"result was cancel {x.IsCanceled}"),
                 TaskContinuationOptions.OnlyOnCanceled);
 
             try
             {
-                t.Start();
+                task2.Start();
             }
             catch (AggregateException e)
             {
@@ -83,6 +155,86 @@ namespace SampleCode.Test.MultiThread
                 throw;
             }
         }
+
+        #endregion
+
+        #region TaskCompletionSource类
+
+        /// <summary>
+        /// TaskCompletionSource类
+        /// </summary>
+        [Test]
+        public void TaskCompletionSourceTest()
+        {
+            //TaskCompletionSource可以创建一个任务, 这个任务不是那种需要执行启动操作的任务,
+            //而是操作结束或出错时手动创建的附属任务
+
+            //下例使用TaskCompletionSource编写Run函数
+            //本质上下述代码和调用Task.Factory.StartNew, 并传递TaskCreationOptions.LongRunning参数是等价的
+            var task = Run((() =>
+            {
+                Thread.Sleep(1000);
+                return 42;
+            }));
+            task.Wait();
+            var result = task.Result;
+
+            //TaskCompletionSource的真正作用在于创建一个不绑定线程的任务
+            //例如我们可以使用Timer实现Thread.Delay方法(Timer不是一个线程)
+            Delay(1000).GetAwaiter().OnCompleted(() => { Console.WriteLine(42); });
+
+            Thread.Sleep(1500);
+        }
+
+        private Task<T> Run<T>(Func<T> function)
+        {
+            var tcs = new TaskCompletionSource<T>();
+            new Thread((() =>
+            {
+                try
+                {
+                    tcs.SetResult(function());
+                }
+                catch (Exception e)
+                {
+                    tcs.SetException(e);
+                }
+            })).Start();
+
+            return tcs.Task;
+        }
+
+        public Task Delay(int milliseconds)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            var timer = new System.Timers.Timer(milliseconds) { AutoReset = false };
+            timer.Elapsed += delegate
+            {
+                timer.Dispose();
+                tcs.SetResult(null);
+            };
+            timer.Start();
+
+            return tcs.Task;
+        }
+
+        #endregion
+
+        #region Task.Delay方法
+
+        /// <summary>
+        /// Task.Delay方法
+        /// </summary>
+        [Test]
+        public void DelayTaskTest()
+        {
+            //Task.Delay是异步版本的Thread.Sleep
+            Task.Delay(1000).GetAwaiter().OnCompleted(() => {Console.WriteLine("1");});
+
+            Thread.Sleep(1500);
+        }
+
+        #endregion
 
         /// <summary>
         /// 子任务
@@ -205,13 +357,6 @@ namespace SampleCode.Test.MultiThread
             //任务取消
             tokenSource.Cancel();
         }
-
-        private static void StartCode(object i)
-        {
-            Console.WriteLine($"开始执行任务-{i}");
-            Thread.Sleep(1000);
-        }
-
         private static int Sum(int i)
         {
             var sum = 0;

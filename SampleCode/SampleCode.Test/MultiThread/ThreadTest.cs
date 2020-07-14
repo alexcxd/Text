@@ -250,6 +250,39 @@ namespace SampleCode.Test.MultiThread
         }
 
         #endregion
+
+        #region 信号发送
+
+        /// <summary>
+        /// 信号发送
+        /// </summary>
+        public void ThreadSignalingTest()
+        {
+            //信号发送:一个线程等待来着其他线程的通知
+
+            //ManualResetEvent是最简单的信号发送结构
+            var signal = new ManualResetEvent(false);
+
+            new Thread(() =>
+            {
+                Console.WriteLine("Waiting for signal");
+
+                //WaitOne会阻塞线程
+                signal.WaitOne();
+
+                //
+                signal.Dispose();
+
+                Console.WriteLine("Got signal");
+            }).Start();
+
+            Thread.Sleep(2000);
+
+            //Set会打开被signal阻塞的线程, 使用Reset可以将其再次关闭
+            signal.Set();
+        }
+
+        #endregion
     }
 
     public class Person
