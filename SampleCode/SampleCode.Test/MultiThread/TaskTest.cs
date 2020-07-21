@@ -14,6 +14,19 @@ namespace SampleCode.Test.MultiThread
     [TestFixture]
     public class TaskTest
     {
+        #region 基于任务的异步模式原则
+
+        /*
+         * 基于任务的异步模式(Task-based Asynchronous Pattern, TAP)
+         * 1.返回一个正在运行的Task或者Task<TResult>
+         * 2.拥有async后缀(除了任务组合器等特殊情况)
+         * 3.若支持取消操作或进度报告, 则需要有接受CancellationToken或IProgress的重载
+         * 4.快速返回调用者
+         * 5.对于I/O密集操作不绑定线程
+         */
+
+        #endregion
+
         #region 启动任务
 
         /// <summary>
@@ -168,6 +181,7 @@ namespace SampleCode.Test.MultiThread
         {
             //TaskCompletionSource可以创建一个任务, 这个任务不是那种需要执行启动操作的任务,
             //而是操作结束或出错时手动创建的附属任务
+            //TaskCompletionSource是一种在底层实现I/O密集异步方法的标准手段
 
             //下例使用TaskCompletionSource编写Run函数
             //本质上下述代码和调用Task.Factory.StartNew, 并传递TaskCreationOptions.LongRunning参数是等价的
@@ -229,10 +243,151 @@ namespace SampleCode.Test.MultiThread
         public void DelayTaskTest()
         {
             //Task.Delay是异步版本的Thread.Sleep
-            Task.Delay(1000).GetAwaiter().OnCompleted(() => {Console.WriteLine("1");});
+            Task.Delay(1000).GetAwaiter().OnCompleted(() => { Console.WriteLine("1"); });
 
             Thread.Sleep(1500);
         }
+
+        #endregion
+
+        #region 取消任务
+
+        /// <summary>
+        /// 取消任务
+        /// </summary>
+        [Test]
+        public void TaskCancelTest()
+        {
+            //并发操作在启动后都可以通过取消标记源取消相关操作
+            //CLR中大部分异步方法都支持取消令牌
+
+            //取消标记源
+            //CancellationTokenSource可以在构造函数中指定一个时间间隔,
+            //达到在一段时间之后启动取消操作的目的
+            var tokenSource = new CancellationTokenSource();
+            //取消令牌
+            var token = tokenSource.Token;
+            //CancellationToken可以注册一个在取消操作发生时的回调函数
+            token.Register(() =>
+            {
+                Console.WriteLine("Task cancel");
+            });
+
+            var task = Task.Run(async () =>
+            {
+                while (true)
+                {
+                    if (token.IsCancellationRequested)
+                    {
+                        //也可以直接抛出ThrowIfCancellationRequested
+                        //token.ThrowIfCancellationRequested();
+                        return;
+                    }
+
+                    //模拟等待100ms, 等效于Thread.Sleep
+                    await Task.Delay(100, token);
+                }
+            }, token);
+
+            //任务取消
+            tokenSource.Cancel();
+        }
+
+        #endregion
+
+        #region 进度报告
+
+        /// <summary>
+        /// 进度报告
+        /// </summary>
+        [Test]
+        public async Task TaskProgressTest()
+        {
+            //CLR专门针对进度报告的类型: IProgress<T>接口和Progress类
+            //类Progress构造函数中可以接受一个委托对进度进行包装
+            var onProgressPercentChanged = new Progress<int>(x => Console.WriteLine(x + "%"));
+            await Foo(onProgressPercentChanged);
+
+        }
+
+        public Task Foo(IProgress<int> onProgressPercentChanged)
+        {
+            return Task.Run(() =>
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    if (i % 10 == 0)
+                    {
+                        onProgressPercentChanged.Report(i / 10);
+
+                        Thread.Sleep(10);
+                        //逻辑
+                    }
+                }
+            });
+        }
+
+        #endregion
+
+        #region 任务组合器
+
+        /// <summary>
+        /// 任务组合器
+        /// </summary>
+        [Test]
+        public async Task CombinationTaskTest()
+        {
+            //CLR包含两种任务组合器Task.WhenAny和Task.WhenAll
+
+            //Task.WhenAny方法会在任务组中任意一个任务完成时返回这个任务
+            //Task.WhenAny会返回第一个完成的任务
+            //如果某个非第一个结束的任务出现了异常, 除非我们等待这个任务, 否则这个异常将成为未观测的异常
+            var winningTask = await Task.WhenAny(Delay1(), Delay2(), Delay3());
+            Console.WriteLine(winningTask.Result);  //1
+            //Task.WhenAny可以在原本不支持超时和取消的操作中添加超时和取消功能
+            var task = SomeAsyncFunc();
+            Task winner = await Task.WhenAny(task, Task.Delay(5000));
+            if (task != winner)
+            {
+                //throw new TimeoutException();
+                Console.WriteLine("TimeoutException");
+            }
+
+            //Task.WhenAll返回一个任务, 该任务仅当参数中所有任务全部完成时才完成
+            //等价于各个任务分别await调用, 但是复数次等待的效率一般是低于一次等待的
+            var allResult = await Task.WhenAll(Delay1(), Delay2(), Delay3());
+            foreach (var i in allResult)
+            {
+                Console.WriteLine(i);
+            }
+            //如果组合任务产生了复数个异常, 则可以通过以下写法获取所有异常,
+            //这些异常组合在AggregateException中
+            var task1 = Task.Run(() => throw new ArgumentNullException());
+            var task2 = Task.Run(() => throw new NullReferenceException());
+            var all = Task.WhenAll(task1, task2);
+            try
+            {
+                await all;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(all.Exception.InnerExceptions.Count); //2
+            }
+
+            //自定义组合器
+            //1.为任一任务设定一个超时时间
+            var timeoutTask = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                return 1;
+            }).WithTimeout(new TimeSpan(0, 0, 1));
+        }
+
+        private async Task<int> Delay1() { await Task.Delay(1000); return 1; }
+        private async Task<int> Delay2() { await Task.Delay(2000); return 2; }
+        private async Task<int> Delay3() { await Task.Delay(3000); return 3; }
+
+        private async Task<string> SomeAsyncFunc() { await Task.Delay(10); return "SomeAsyncFunc"; }
 
         #endregion
 
@@ -319,44 +474,6 @@ namespace SampleCode.Test.MultiThread
             }
         }
 
-        /// <summary>
-        /// 取消和暂停任务
-        /// </summary>
-        [Test]
-        public void TaskCancelAndStopTest()
-        {
-
-            // 取消标记源
-            var tokenSource = new CancellationTokenSource();
-            var token = tokenSource.Token;
-
-            // ManualResetEvent是一线程用来控制别一个线程的信号。
-            var resetEvent = new ManualResetEvent(true);
-
-            var task = new Task(async () =>
-            {
-                while (true)
-                {
-                    if (token.IsCancellationRequested)
-                    {
-                        return;
-                    }
-
-                    // 初始化为true时执行WaitOne不阻塞
-                    resetEvent.WaitOne();
-
-                    // 模拟等待100ms, 等效于Thread.Sleep
-                    await Task.Delay(100, token);
-                }
-            }, token);
-
-            //任务暂停
-            resetEvent.Reset();
-            //任务继续
-            resetEvent.Set();
-            //任务取消
-            tokenSource.Cancel();
-        }
         private static int Sum(int i)
         {
             var sum = 0;
@@ -389,6 +506,19 @@ namespace SampleCode.Test.MultiThread
                 }
             }
             return sum;
+        }
+    }
+    public static class TaskUtil
+    {
+        public static async Task<T> WithTimeout<T>(this Task<T> task, TimeSpan timeout)
+        {
+            Task winner = Task.WhenAny(task, Task.Delay(timeout));
+            if (winner != task)
+            {
+                throw new TimeoutException();
+            }
+
+            return await task;
         }
     }
 }
