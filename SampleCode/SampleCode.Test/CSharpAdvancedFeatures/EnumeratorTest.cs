@@ -12,7 +12,7 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
     public class EnumeratorTest
     {
         /// <summary>
-        /// 可枚举类型
+        /// 可枚举类型 
         /// </summary>
         [Test]
         public void EnumeratorCodeTest()
