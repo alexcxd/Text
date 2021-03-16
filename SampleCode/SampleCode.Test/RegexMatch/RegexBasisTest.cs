@@ -217,8 +217,8 @@ namespace SampleCode.Test.RegexMatch
             //通过分组的命名捕获任意分组
             Console.WriteLine(Regex.Replace(
                 "<msg>Hello</msg>", 
-                @"<(?<tag>\w+?)>(?<text>.*?)</(\k'tag')>", 
-                @"<${tag} value = $""{text}""/>"));            //< msg value = "Hello"/>
+                @"<(?<tag>\w+?)>(?<text>.*?)</(\k'tag')>",
+                @"<${tag} value = ""${text}""/>"));            //< msg value = "Hello"/>
 
             //MatchEvaluator委托
             //在Regex.Replace中通过MatchEvaluator委托实现对匹配结果的逻辑替换

@@ -98,7 +98,7 @@ namespace SampleCode.Test.CSharpAdvancedFeatures
             //如果委托实例指向相同的目标方法, 则认为他们是等价的
             D1 d11 = Method1;
             D1 d12 = Method1;
-            Console.WriteLine(d11 == d12);  //True]
+            Console.WriteLine(d11 == d12);  //True
 
             //参数的兼容性
             //委托可以有比它的目标类型方法参数类型更具体的参数类型, 这称为逆变

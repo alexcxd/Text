@@ -14,6 +14,8 @@ namespace SampleCode.Test.Reflect
     /// </summary>
     public class ReflectTest
     {
+        #region 获取类型
+
         /// <summary>
         /// 获取类型
         /// </summary>
@@ -58,6 +60,10 @@ namespace SampleCode.Test.Reflect
             Console.WriteLine(typeof(int).MakeArrayType(3)); //System.Int32[,,]
         }
 
+        #endregion
+
+        #region 反射-实例化类型(调用构造函数)
+
         /// <summary>
         /// 反射-实例化类型(调用构造函数)
         /// </summary>
@@ -84,6 +90,10 @@ namespace SampleCode.Test.Reflect
             var list3 = Activator.CreateInstance(typeof(List<>).MakeGenericType(typeof(int)));
 
         }
+
+        #endregion
+
+        #region 反射-获取成员类型
 
         /// <summary>
         /// 反射-获取成员类型
@@ -202,6 +212,10 @@ namespace SampleCode.Test.Reflect
 
         delegate string StringToString(string s);
 
+        #endregion
+
+        #region 反射-动态调用成员
+
         /// <summary>
         /// 反射-动态调用成员
         /// </summary>
@@ -296,6 +310,10 @@ namespace SampleCode.Test.Reflect
             #endregion
         }
 
+        #endregion
+
+        #region 反射-访问非公有类型
+
         /// <summary>
         /// 反射-访问非公有类型
         /// </summary>
@@ -315,6 +333,36 @@ namespace SampleCode.Test.Reflect
             Console.WriteLine(fi?.GetValue(walnut));    //false
 
         }
+
+        #endregion
+
+        #region 反射-检索特性
+
+        /// <summary>
+        /// 反射-检索特性
+        /// </summary>
+        [Test(Description = "测试")]
+        public void ReflectAttributeTest()
+        {
+            //可以使用Attribute.GetCustomAttribute或Attribute.GetCustomAttributes方法检索特性
+            //1.获取指定方法的指定特性
+            var mi = typeof(ReflectTest).GetMethod("ReflectAttributeTest");
+            if (mi != null)
+            {
+                var att = (TestAttribute)Attribute.GetCustomAttribute(mi, typeof(TestAttribute));
+                Console.WriteLine($"方法名：{mi.Name} 特性内容：{att?.Description}");
+            }
+            //2.获取指定方法的所有特性
+            var atts = Attribute.GetCustomAttributes(mi);
+            foreach (var att in atts)
+            {
+                Console.WriteLine(att);
+            }
+        }
+
+        #endregion
+
+        #region 调用未知类型的泛型接口成员
 
         /// <summary>
         /// 调用未知类型的泛型接口成员
@@ -363,5 +411,7 @@ namespace SampleCode.Test.Reflect
 
             return "\n\t" + sb;
         }
+
+        #endregion
     }
 }

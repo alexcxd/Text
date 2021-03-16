@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -273,5 +274,49 @@ namespace SampleCode.Test.Network
         }
 
         #endregion
+
+        [Test]
+        public async Task Test()
+        {
+            var urlMain = $@"https://www.cartoonmad.com/75632/4462/";
+            var filePath = @"D:\Desktop\OVERLORD\";
+
+            for (var i = 53; i <= 53; i++)
+            {
+                var chapter = i.ToString("000");
+                var url = urlMain + $"{chapter}";
+
+                if (!Directory.Exists(filePath + @"\" + chapter))
+                {
+                    Directory.CreateDirectory(filePath + @"\" + chapter);
+                }
+
+                for (var j = 1; j < 100; j++)
+                {
+                    var page = j.ToString("000");
+
+                    try
+                    {
+                        var httpClient = new HttpClient();
+                        var fullUrl = url + "/" + page + ".jpg";
+                        var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
+                        var response = await httpClient.SendAsync(request);
+                        if (fullUrl != response.RequestMessage.RequestUri.ToString())
+                        {
+                            break;
+                        }
+
+                        var result = await response.Content.ReadAsByteArrayAsync();
+
+                        await File.WriteAllBytesAsync(filePath + $@"\{chapter}\{page}.jpg", result);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(chapter + " " + page);
+                    }
+                }
+            }
+
+        }
     }
 }
