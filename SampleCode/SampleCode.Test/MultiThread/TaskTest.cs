@@ -85,7 +85,7 @@ namespace SampleCode.Test.MultiThread
         public void TaskExceptionTest()
         {
             //如果任务中抛出一个未处理的异常, 那么调用Wait或者访问时, 异常会被重新抛出(其中异常会被包装为AggregateException)
-            var task1 = Task.Run(() => { throw new ArgumentNullException(); });
+            var task1 = Task.Run(() => throw new ArgumentNullException());
             try
             {
                 task1.Wait();
@@ -106,9 +106,33 @@ namespace SampleCode.Test.MultiThread
             //可以使用TaskScheduler.UnobservedTaskException在全局范围订阅未观测异常
             TaskScheduler.UnobservedTaskException += (sender, args) =>
             {
-
+                args.SetObserved();
+                ((AggregateException)args.Exception)?.Handle(ex =>
+                {
+                    Console.WriteLine("Exception type: {0}", ex.GetType());
+                    return true;
+                });
             };
 
+            Run();
+
+            Thread.Sleep(100);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        private static void Run()
+        {
+            var task1 = new Task(() => throw new ArgumentNullException());
+            var task2 = new Task(() => throw new ArgumentOutOfRangeException());
+
+            task1.Start();
+            task2.Start();
+
+            while (!task1.IsCompleted || !task2.IsCompleted)
+            {
+                Thread.Sleep(50);
+            }
         }
 
         #endregion
@@ -195,6 +219,7 @@ namespace SampleCode.Test.MultiThread
 
             //TaskCompletionSource的真正作用在于创建一个不绑定线程的任务
             //例如我们可以使用Timer实现Thread.Delay方法(Timer不是一个线程)
+            Console.WriteLine("TaskCompletionSourceTest:" + Thread.CurrentThread.ManagedThreadId);
             Delay(1000).GetAwaiter().OnCompleted(() => { Console.WriteLine(42); });
 
             Thread.Sleep(1500);
@@ -226,8 +251,11 @@ namespace SampleCode.Test.MultiThread
             {
                 timer.Dispose();
                 tcs.SetResult(null);
+                Console.WriteLine("timer:" + Thread.CurrentThread.ManagedThreadId);
             };
             timer.Start();
+
+            Console.WriteLine("Delay:" + Thread.CurrentThread.ManagedThreadId);
 
             return tcs.Task;
         }
@@ -243,6 +271,9 @@ namespace SampleCode.Test.MultiThread
         public void DelayTaskTest()
         {
             //Task.Delay是异步版本的Thread.Sleep
+            //不同点
+            //Sleep不占用CPU处理资源
+            //Delay会占用CPU处理资源, 只是延迟了几秒执行代码而已
             Task.Delay(1000).GetAwaiter().OnCompleted(() => { Console.WriteLine("1"); });
 
             Thread.Sleep(1500);

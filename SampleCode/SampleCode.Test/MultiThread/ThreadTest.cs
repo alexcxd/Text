@@ -256,6 +256,7 @@ namespace SampleCode.Test.MultiThread
         /// <summary>
         /// 信号发送
         /// </summary>
+        [Test]
         public void ThreadSignalingTest()
         {
             //信号发送:一个线程等待来着其他线程的通知
