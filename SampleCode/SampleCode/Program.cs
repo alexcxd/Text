@@ -11,22 +11,29 @@ namespace SampleCode
     {
         public static void Main(string[] args)
         {
-            /*for (int i = 0; i < 64; i++)
+            var semaphore = new SemaphoreSlim(4, 8);   //指定初始最大可以进入线程数量
+            for (var i = 0; i < 32; i++)
             {
-                var aReq = WebRequest.Create("http://www.baidu.com") as HttpWebRequest;
+                var id = i;
+                Task.Run(() =>
+                {
+                    Console.WriteLine(id + "想要进入");
+                    semaphore.Wait();
+                    Console.WriteLine(id + "进入" + semaphore.CurrentCount);
+                    Thread.Sleep(1000);
+                    semaphore.Release();
+                    Console.WriteLine(id + "退出");
+                });
+            }
 
-                aReq.Timeout = 4000; // 我希望请求只需要4秒，否则会出现问题
+            Console.ReadKey();
+        }
 
-                var sw1 = new Stopwatch();
-                sw1.Start();
-                HttpWebResponse aResp = aReq.GetResponse() as HttpWebResponse;
-                sw1.Stop();
-
-                Console.WriteLine(sw1.ElapsedMilliseconds);
-
-                //aResp.Close(); // 如果不执行此关闭操作，则肯定会超时,套接字将不会被释放。
-            }*/
-
+        /// <summary>
+        /// 测试HttpRequest在高并发情况下的响应时间
+        /// </summary>
+        public void HttpRequestConcurrentTest()
+        {
             //可以同时发出请求的工作线程的数量(不要超过64)
             int numberRequests = 64;
 
@@ -46,13 +53,13 @@ namespace SampleCode
             var sw = new Stopwatch();
             sw.Start();
             //如果没有设置线程池，就会有足够的延迟导致Web请求超时
-            ThreadPool.SetMinThreads(numberRequests, minIoc);
+            ThreadPool.SetMinThreads(64, minIoc);
 
             #region Parallel并行并限制并发数为4
 
-            /*var options = new ParallelOptions
+            var options = new ParallelOptions
             {
-                MaxDegreeOfParallelism = 4, //设置最大并行数
+                MaxDegreeOfParallelism = 32, //设置最大并行数
             };
 
             Parallel.For(0, 64, options, (i, pls) =>
@@ -62,18 +69,18 @@ namespace SampleCode
 
                 manualEvents[i] = new ManualResetEvent(false); //线程完成的事件
 
-                theInfo.evtReset = manualEvents[i];
+                theInfo.EvtReset = manualEvents[i];
 
-                theInfo.iReqNumber = i; //跟踪这是什么请求
+                theInfo.IReqNumber = i; //跟踪这是什么请求
 
-                theInfo.strUrl = httpSite; // 要打开的URL
+                theInfo.StrUrl = httpSite; // 要打开的URL
 
                 ThreadProc(theInfo);
-            });*/
+            });
 
             #endregion
 
-            for (int i = 0; i < numberRequests; i++)
+            /*for (int i = 0; i < numberRequests; i++)
             {
                 //创建一个类来传递信息给线程
                 ThreadStateInfo theInfo = new ThreadStateInfo();
@@ -91,22 +98,20 @@ namespace SampleCode
 
             //等待直到ManualResetEvent被设置，这样应用程序在调用回调之后才会退出。
             //这里最多可以等待64个句柄。
-            WaitHandle.WaitAll(manualEvents);
+            WaitHandle.WaitAll(manualEvents);*/
             sw.Stop();
 
             Console.WriteLine($"done! Time {sw.ElapsedMilliseconds}");
-
-            Console.ReadKey();
         }
 
         // 这个类在工作线程中用于传递信息
         public class ThreadStateInfo
         {
-            public string strUrl; // 我们将发出请求的URL
+            public string StrUrl; // 我们将发出请求的URL
 
-            public ManualResetEvent evtReset; // 用来表示这个工作线程已经完成
+            public ManualResetEvent EvtReset; // 用来表示这个工作线程已经完成
 
-            public int iReqNumber; // 用于指示这是哪个请求
+            public int IReqNumber; // 用于指示这是哪个请求
         }
 
         // 它完成从工作线程发出http请求的工作
@@ -116,13 +121,13 @@ namespace SampleCode
 
             try
             {
-                HttpWebRequest aReq = WebRequest.Create(tsInfo.strUrl) as HttpWebRequest;
+                HttpWebRequest aReq = WebRequest.Create(tsInfo.StrUrl) as HttpWebRequest;
 
                 var servicePoint = aReq.ServicePoint.ConnectionLimit;
 
                 aReq.Timeout = 1000 * 60; 
 
-                Console.WriteLine($"Begin Request {tsInfo.iReqNumber}  {DateTime.Now:yyyy-MM-dd HH:mm:ss:fff}");
+                Console.WriteLine($"Begin Request {tsInfo.IReqNumber}  {DateTime.Now:yyyy-MM-dd HH:mm:ss:fff}");
 
                 var sw = new Stopwatch();
                 sw.Start();
@@ -131,21 +136,21 @@ namespace SampleCode
 
                 var thread = Thread.CurrentThread;
 
-                Console.WriteLine($"Response {tsInfo.iReqNumber} Time {sw.ElapsedMilliseconds}  {DateTime.Now:yyyy-MM-dd HH:mm:ss:fff}");
-
-                Thread.Sleep(500); //模拟服务器处理请求的半秒延迟
+                Console.WriteLine($"Response {tsInfo.IReqNumber} Time {sw.ElapsedMilliseconds}  {DateTime.Now:yyyy-MM-dd HH:mm:ss:fff}");
 
                 aResp.Close(); // 如果不执行此关闭操作，则肯定会超时,套接字将不会被释放。
 
-                Console.WriteLine("End Request {0}", tsInfo.iReqNumber);
+                Thread.Sleep(500); //模拟服务器处理请求的半秒延迟
+
+                Console.WriteLine("End Request {0}", tsInfo.IReqNumber);
             }
             catch (WebException theEx)
             {
-                Console.WriteLine("Exception for Request {0}: {1}", tsInfo.iReqNumber, theEx.Message);
+                Console.WriteLine("Exception for Request {0}: {1}", tsInfo.IReqNumber, theEx.Message);
             }
 
             //通知主线程这个请求已经完成
-            tsInfo.evtReset.Set();
+            tsInfo.EvtReset.Set();
         }
     }
 }

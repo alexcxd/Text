@@ -65,6 +65,7 @@ namespace SampleCode.Test.MultiThread
             //自旋和阻塞
             //同步的I/O密集操作的大部分时间都花费在阻塞线程上, 但也可能在一个定期循环中自旋
             //实际上自旋是将I/O密集转化为计算密集(自旋过程中, CLR和操作系统会认为这个线程正在执行计算, 因此会分配资源)
+            //非常短暂的自旋是高效的, 因为它避免了上下文的切换带来的延迟和开销
             var time = DateTime.Now.AddSeconds(3);
             while (DateTime.Now < time)
             {
