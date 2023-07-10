@@ -9,20 +9,28 @@ namespace SampleCode
 {
     class Program
     {
+        private static object _lock = new object();
+
         public static void Main(string[] args)
         {
-            var semaphore = new SemaphoreSlim(4, 8);   //指定初始最大可以进入线程数量
-            for (var i = 0; i < 32; i++)
+            for (int i = 0; i < 2; i++)
             {
-                var id = i;
                 Task.Run(() =>
                 {
-                    Console.WriteLine(id + "想要进入");
-                    semaphore.Wait();
-                    Console.WriteLine(id + "进入" + semaphore.CurrentCount);
-                    Thread.Sleep(1000);
-                    semaphore.Release();
-                    Console.WriteLine(id + "退出");
+                    var b = false;
+                    try
+                    {
+                        Monitor.TryEnter(_lock, 10000, ref b);
+
+                        Thread.Sleep(1000);
+                    }
+                    finally
+                    {
+                        if (b)
+                        {
+                            Monitor.Exit(_lock);
+                        }
+                    }
                 });
             }
 
