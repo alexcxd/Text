@@ -38,14 +38,22 @@ namespace SampleCode.DesignPattern.创建型模式
     /// </summary>
     public class Singleton
     {
-        private static Singleton instanse;
+        /// <summary>
+        /// 1、提供一个静态实例，当类加载器加载该类时就会new一个出来
+        /// </summary>
+        private static readonly Singleton instanse = new Singleton();
 
+        /// <summary>
+        /// 2、私有化构造器:外部是不能直接new该对象的
+        /// </summary>
+        private Singleton() { }
+
+        /// <summary>
+        ///  3、对外提供一个公共方法来获取这个唯一对象
+        /// </summary>
+        /// <returns></returns>
         public static Singleton GetSingleton()
         {
-            if (instanse == null)
-            {
-                instanse = new Singleton();
-            }
             return instanse;
         }
     }
