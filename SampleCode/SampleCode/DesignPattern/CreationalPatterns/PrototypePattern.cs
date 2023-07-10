@@ -1,13 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace SampleCode.DesignPattern.创建型模式
+namespace SampleCode.DesignPattern.CreationalPatterns
 {
     /// <summary>
     /// 原型模式
-    /// </summary>
     /// 用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象
     /// 减少实例所消耗的资源
+    /// </summary>
     public class PrototypePattern
     {
         public static void PrototypePatternMain()

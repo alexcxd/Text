@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SampleCode.DesignPattern.行为型模式
+namespace SampleCode.DesignPattern.BehavioralPatterns
 {
     /// <summary>
     /// 备忘录模式

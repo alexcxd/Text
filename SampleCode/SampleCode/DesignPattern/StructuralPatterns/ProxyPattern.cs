@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleCode.DesignPattern.结构型模式
+namespace SampleCode.DesignPattern.StructuralPatterns
 {
     /// <summary>
     /// 代理模式

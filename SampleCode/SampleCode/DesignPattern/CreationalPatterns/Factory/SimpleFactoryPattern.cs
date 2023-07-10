@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleCode.DesignPattern.创建型模式.Factory
+namespace SampleCode.DesignPattern.CreationalPatterns.Factory
 {
     public class SimpleFactoryPattern
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace SampleCode.DesignPattern.行为型模式
+namespace SampleCode.DesignPattern.BehavioralPatterns
 {
     /// <summary>
     /// 解释器模式

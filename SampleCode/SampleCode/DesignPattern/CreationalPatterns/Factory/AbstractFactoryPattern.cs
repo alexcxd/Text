@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace SampleCode.DesignPattern.创建型模式.Factory
+namespace SampleCode.DesignPattern.CreationalPatterns.Factory
 {
     /// <summary>
     /// 抽象工厂模式
-    /// </summary>
+    /// 抽象工厂利用一个独立的接口或者抽象类提供“一组相关的对象”
     /// 围绕一个超级工厂创建其他工厂，该超级工厂又称为其他工厂的工厂
+    /// </summary>
     public class AbstractFactoryPattern
     {
         public static void AbstractFactoryPatternMain()

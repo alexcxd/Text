@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SampleCode.DesignPattern.结构型模式
+namespace SampleCode.DesignPattern.StructuralPatterns
 {
     /// <summary>
     /// 享元模式

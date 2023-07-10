@@ -1,8 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
-using SampleCode.DesignPattern.创建型模式;
+using SampleCode.DesignPattern.CreationalPatterns;
+using SampleCode.DesignPattern.CreationalPatterns.Singleton;
 
-namespace SampleCode.Test.DesignPattern.创建型模式
+namespace SampleCode.Test.DesignPattern.CreationalPatterns
 {
     public class SingletonPatternTest
     {
@@ -12,8 +13,8 @@ namespace SampleCode.Test.DesignPattern.创建型模式
         [Test]
         public void SingletonPatternCodeTest()
         {
-            var instanse = Singleton.GetSingleton();
-            var instanse1 = Singleton.GetSingleton();
+            var instanse = NormalSingleton.GetSingleton();
+            var instanse1 = SafeLazySingleton.GetInstance();
 
             Console.WriteLine(instanse.Equals(instanse1));
         }

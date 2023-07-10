@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using SampleCode.DesignPattern.创建型模式.Factory;
+using SampleCode.DesignPattern.CreationalPatterns.Factory;
 
-namespace SampleCode.Test.DesignPattern.创建型模式.Factory
+namespace SampleCode.Test.DesignPattern.CreationalPatterns.Factory
 {
     public class AbstractFactoryPatternTest
     {

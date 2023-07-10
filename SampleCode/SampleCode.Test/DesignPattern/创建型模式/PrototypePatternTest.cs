@@ -1,9 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using SampleCode.DesignPattern.创建型模式;
+using SampleCode.DesignPattern.CreationalPatterns;
 
-namespace SampleCode.Test.DesignPattern.创建型模式
+namespace SampleCode.Test.DesignPattern.CreationalPatterns
 {
     public class PrototypePatternTest
     {

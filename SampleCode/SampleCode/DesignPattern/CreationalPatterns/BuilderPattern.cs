@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SampleCode.DesignPattern.创建型模式
+namespace SampleCode.DesignPattern.CreationalPatterns
 {
     /// <summary>
     /// 建造者模式
-    /// </summary>
     /// 将一个复杂对象的构建与它的表示分离,使的同样的构建过程可以创建不同的表示
+    /// </summary>
     public class BuilderPattern
     {
         public static void BuliderPatternMain()

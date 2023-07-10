@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
-using SampleCode.DesignPattern.结构型模式;
+using SampleCode.DesignPattern.StructuralPatterns;
 
-namespace SampleCode.Test.DesignPattern.结构型模式
+namespace SampleCode.Test.DesignPattern.StructuralPatterns
 {
     [TestFixture]
     public class AdapterPatternTest

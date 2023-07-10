@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using SampleCode.DesignPattern.行为型模式;
+using SampleCode.DesignPattern.BehavioralPatterns;
 
-namespace SampleCode.Test.DesignPattern.行为型模式
+namespace SampleCode.Test.DesignPattern.BehavioralPatterns
 {
     [TestFixture]
     public class InterpreterPrtternTest

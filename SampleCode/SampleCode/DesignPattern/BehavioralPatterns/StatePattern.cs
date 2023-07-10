@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleCode.DesignPattern.行为型模式
+namespace SampleCode.DesignPattern.BehavioralPatterns
 {
     /// <summary>
     /// 状态模式

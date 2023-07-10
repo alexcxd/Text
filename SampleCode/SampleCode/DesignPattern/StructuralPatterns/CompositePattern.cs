@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace SampleCode.DesignPattern.结构型模式
+namespace SampleCode.DesignPattern.StructuralPatterns
 {
     public class CompositePattern
     {

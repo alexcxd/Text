@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace SampleCode.DesignPattern.创建型模式.Factory
+namespace SampleCode.DesignPattern.CreationalPatterns.Factory
 {
     public class FactoryPattern
     {
         /// <summary>
         /// 工厂模式
+        /// 在某个类中定义用来提供所需服务对象的方法
         /// </summary>
         public static void FactoryPatternMain()
         {

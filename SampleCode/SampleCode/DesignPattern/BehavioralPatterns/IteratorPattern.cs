@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SampleCode.DesignPattern.行为型模式
+namespace SampleCode.DesignPattern.BehavioralPatterns
 {
     /// <summary>
     /// 迭代器模式
