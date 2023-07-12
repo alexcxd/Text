@@ -2,57 +2,57 @@
 
 namespace SampleCode.DesignPattern.CreationalPatterns.Factory
 {
+    /// <summary>
+    /// 工厂方法模式
+    /// 在某个类中定义用来提供所需服务对象的方法
+    /// </summary>
     public class FactoryPattern
     {
-        /// <summary>
-        /// 工厂模式
-        /// 在某个类中定义用来提供所需服务对象的方法
-        /// </summary>
         public static void FactoryPatternMain()
         {
             var factory = new AddFactory();
-            var opereation = factory.CreateOpereation();
-            opereation.NumbleA = 100;
-            opereation.NumbleB = 10.1;
-            var result = opereation.GetResult();
+            var operation = factory.CreateOperation();
+            operation.NumberA = 100;
+            operation.NumberB = 10.1;
+            var result = operation.GetResult();
             Console.WriteLine(result);
         }
 
     }
 
-    public interface IFrctory
+    public partial interface IFactory
     {
-        Operation CreateOpereation();
+        Operation CreateOperation();
     }
 
 
-    public class AddFactory : IFrctory
+    public class AddFactory : IFactory
     {
-        public Operation CreateOpereation()
+        public Operation CreateOperation()
         {
             return new OperationAdd();
         }
     }
 
-    public class SubFactory : IFrctory
+    public class SubFactory : IFactory
     {
-        public Operation CreateOpereation()
+        public Operation CreateOperation()
         {
             return new OperationSub();
         }
     }
 
-    public class MulFactory : IFrctory
+    public class MulFactory : IFactory
     {
-        public Operation CreateOpereation()
+        public Operation CreateOperation()
         {
             return new OperationMul();
         }
     }
 
-    public class DivFactory : IFrctory
+    public class DivFactory : IFactory
     {
-        public Operation CreateOpereation()
+        public Operation CreateOperation()
         {
             return new OperationDiv();
         }

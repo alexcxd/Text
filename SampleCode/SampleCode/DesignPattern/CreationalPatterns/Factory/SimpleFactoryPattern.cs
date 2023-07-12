@@ -10,8 +10,8 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
         public static void SimpleFactoryPatternMain()
         {
             var oper = OperationFactory.CreateOperation("-");
-            oper.NumbleA = 1;
-            oper.NumbleB = 3;
+            oper.NumberA = 1;
+            oper.NumberB = 3;
             Console.WriteLine("结果为：" + oper.GetResult());
             Console.ReadKey();
         }
@@ -47,9 +47,9 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
 
     public class Operation
     {
-        public double NumbleA { get; set; }
+        public double NumberA { get; set; }
 
-        public double NumbleB { get; set; }
+        public double NumberB { get; set; }
 
         protected double result = 0;
 
@@ -63,7 +63,7 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
     {
         public override double GetResult()
         {
-            result = NumbleA + NumbleB;
+            result = NumberA + NumberB;
             return result;
         }
     }
@@ -72,7 +72,7 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
     {
         public override double GetResult()
         {
-            result = NumbleA - NumbleB;
+            result = NumberA - NumberB;
             return result;
         }
     }
@@ -81,7 +81,7 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
     {
         public override double GetResult()
         {
-            result = NumbleA * NumbleB;
+            result = NumberA * NumberB;
             return result;
         }
     }
@@ -90,11 +90,11 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
     {
         public override double GetResult()
         {
-            if(NumbleB == 0)
+            if(NumberB == 0)
             {
                 throw new Exception("除数不可为0");
             }
-            result = NumbleA / NumbleB;
+            result = NumberA / NumberB;
             return result;
         }
     }

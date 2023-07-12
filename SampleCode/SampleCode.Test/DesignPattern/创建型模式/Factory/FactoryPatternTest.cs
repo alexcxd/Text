@@ -13,10 +13,10 @@ namespace SampleCode.Test.DesignPattern.CreationalPatterns.Factory
         public void FactoryPatternCodeTest()
         {
             var factory = new AddFactory();
-            var opereation = factory.CreateOpereation();
-            opereation.NumbleA = 100;
-            opereation.NumbleB = 10.1;
-            var result = opereation.GetResult();
+            var operation = factory.CreateOperation();
+            operation.NumberA = 100;
+            operation.NumberB = 10.1;
+            var result = operation.GetResult();
             Console.WriteLine(result);
         }
     }

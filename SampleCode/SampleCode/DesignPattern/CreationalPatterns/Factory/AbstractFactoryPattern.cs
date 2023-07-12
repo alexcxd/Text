@@ -13,21 +13,21 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
         {
             //操作MySql数据库
             var mysqlFactory = new MySqlFactory();
-            var mysqlDapartment = mysqlFactory.CreateDapartment();
-            mysqlDapartment.Insert();
-            mysqlDapartment.Delete();
+            var mysqlDepartment = mysqlFactory.CreateDapartment();
+            mysqlDepartment.Insert();
+            mysqlDepartment.Delete();
             var mysqlUser = mysqlFactory.CreateUser();
             mysqlUser.Insert();
             mysqlUser.Delete();
 
             //操作Oracle数据库
             var oracleFactory = new OracleFactory();
-            var oracleDapartment = mysqlFactory.CreateDapartment();
-            mysqlDapartment.Insert();
-            mysqlDapartment.Delete();
+            var oracleDepartment = oracleFactory.CreateDapartment();
+            oracleDepartment.Insert();
+            oracleDepartment.Delete();
             var oracleUser = mysqlFactory.CreateUser();
-            mysqlUser.Insert();
-            mysqlUser.Delete();
+            oracleUser.Insert();
+            oracleUser.Delete();
         }
     }
 
@@ -63,7 +63,7 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
         }
     }
 
-    public class MySQlDapartmentDao : IDao
+    public class MySQlDepartmentDao : IDao
     {
         public void Delete()
         {
@@ -76,7 +76,7 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
         }
     }
 
-    public class OracleDapartmentDao : IDao
+    public class OracleDepartmentDao : IDao
     {
         public void Delete()
         {
@@ -89,17 +89,17 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
         }
     }
 
-    public interface IFactory
+    public partial interface IAbstractFactory
     {
         IDao CreateUser();
         IDao CreateDapartment();
     }
 
-    public class MySqlFactory : IFactory
+    public class MySqlFactory : IAbstractFactory
     {
         public IDao CreateDapartment()
         {
-            return new MySQlDapartmentDao();
+            return new MySQlDepartmentDao();
         }
 
         public IDao CreateUser()
@@ -108,11 +108,11 @@ namespace SampleCode.DesignPattern.CreationalPatterns.Factory
         }
     }
 
-    public class OracleFactory : IFactory
+    public class OracleFactory : IAbstractFactory
     {
         public IDao CreateDapartment()
         {
-            return new OracleDapartmentDao();
+            return new OracleDepartmentDao();
         }
 
         public IDao CreateUser()
