@@ -50,8 +50,20 @@ namespace SampleCode.DesignPattern.StructuralPatterns
             {
                 realSubject = new RealSubject();
             }
-            Console.WriteLine("代理类做了一系列请求");
+
+            RequestBefore();
             realSubject.Request();
+            RequestAfter();
+        }
+
+        public void RequestBefore()
+        {
+            Console.WriteLine("请求前-代理类做了一系列请求");
+        }
+
+        public void RequestAfter()
+        {
+            Console.WriteLine("请求后-代理类做了一系列请求");
         }
     }
 
