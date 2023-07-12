@@ -5,13 +5,13 @@ using SampleCode.DesignPattern.BehavioralPatterns;
 namespace SampleCode.Test.DesignPattern.BehavioralPatterns
 {
     [TestFixture]
-    public class InterpreterPrtternTest
+    public class InterpreterPatternTest
     {
         /// <summary>
         /// 解释器模式
         /// </summary>
         [Test]
-        public void InterpreterPrtternCodeTest()
+        public void InterpreterPatternCodeTest()
         {
             Context2 context = new Context2();
             List<Expression１> expressions = new List<Expression１>();

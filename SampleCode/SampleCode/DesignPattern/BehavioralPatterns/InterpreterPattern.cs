@@ -8,9 +8,9 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
     /// 解释器模式
     /// </summary>
     /// 给定一个语言，定义它的语法的一种表示，并定义一种解释器，这个解释器使用该表示来解释语言中的句子
-    public class InterpreterPrttern
+    public class InterpreterPattern
     {
-        public static void InterpreterPrtternMain()
+        public static void InterpreterPatternMain()
         {
             Context2 context = new Context2();
             List<Expression１> expressions = new List<Expression１>();
