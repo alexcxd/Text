@@ -10,7 +10,7 @@ namespace SampleCode.DesignPattern.StructuralPatterns
     {
         public static void ObjectAdapterPatternMain()
         {
-            Target adapter = new Adapter();
+            ITarget adapter = new Adapter();
             adapter.Request();
         }
 
