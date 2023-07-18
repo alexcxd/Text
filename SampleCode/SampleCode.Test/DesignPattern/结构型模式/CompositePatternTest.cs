@@ -10,11 +10,11 @@ namespace SampleCode.Test.DesignPattern.StructuralPatterns
         [Test]
         public void CompositePatternCodeTest()
         {
-            CompositePattern.CompositePattern1();
+            SafeCompositePattern.CompositePattern1();
 
             Console.WriteLine("-------------");
 
-            CompositePattern.CompositePattern2();
+            SafeCompositePattern.CompositePattern2();
         }
     }
 }
