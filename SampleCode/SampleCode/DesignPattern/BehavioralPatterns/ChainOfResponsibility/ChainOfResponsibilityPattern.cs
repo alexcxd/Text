@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleCode.DesignPattern.BehavioralPatterns
+namespace SampleCode.DesignPattern.BehavioralPatterns.ChainOfResponsibility
 {
     /// <summary>
     /// 责任链模式
@@ -11,8 +11,8 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
     {
         public static void ChainOfResponsibilityPatternMain()
         {
-            ConcreteHandlerA handlerA = new ConcreteHandlerA();
-            ConcreteHandlerB handlerB = new ConcreteHandlerB();
+            var handlerA = new ConcreteHandlerA();
+            var handlerB = new ConcreteHandlerB();
 
             handlerA.SetSuccessor(handlerB);
 
@@ -25,11 +25,11 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
 
     public abstract class Handler
     {
-        protected Handler successor;
+        protected Handler Successor;
 
         public void SetSuccessor(Handler successor)
         {
-            this.successor = successor;
+            this.Successor = successor;
         }
 
         public abstract void HandleRequest(int request);
@@ -46,10 +46,7 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
                 return;
             }
 
-            if (successor != null)
-            {
-                successor.HandleRequest(request);
-            }
+            Successor?.HandleRequest(request);
         }
     }
 
@@ -64,9 +61,9 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
                 return;
             }
 
-            if (successor != null)
+            if (Successor != null)
             {
-                successor.HandleRequest(request);
+                Successor.HandleRequest(request);
             }
         }
     }
