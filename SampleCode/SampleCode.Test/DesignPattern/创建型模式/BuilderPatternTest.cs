@@ -12,15 +12,15 @@ namespace SampleCode.Test.DesignPattern.CreationalPatterns
         [Test]
         public void BuilderPatternCodeTest()
         {
-            ConcreteBuilderA concreteBuilderA = new ConcreteBuilderA();
-            ConcreteBuilderB concreteBuilderB = new ConcreteBuilderB();
+            BuilderPattern.ConcreteBuilderA concreteBuilderA = new BuilderPattern.ConcreteBuilderA();
+            BuilderPattern.ConcreteBuilderB concreteBuilderB = new BuilderPattern.ConcreteBuilderB();
 
-            Director director = new Director();
-            director.Construct(concreteBuilderA);
-            var aProcudt = concreteBuilderA.GetResult();
-            aProcudt.Show();
+            BuilderPattern.Director director = new BuilderPattern.Director();
+            director.GetProduct(concreteBuilderA);
+            var aProduct = concreteBuilderA.GetResult();
+            aProduct.Show();
 
-            director.Construct(concreteBuilderB);
+            director.GetProduct(concreteBuilderB);
             var bProduct = concreteBuilderB.GetResult();
             bProduct.Show();
         }

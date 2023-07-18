@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using SampleCode.DesignPattern.BehavioralPatterns;
+using SampleCode.DesignPattern.BehavioralPatterns.ChainOfResponsibility;
 
 namespace SampleCode.Test.DesignPattern.BehavioralPatterns
 {

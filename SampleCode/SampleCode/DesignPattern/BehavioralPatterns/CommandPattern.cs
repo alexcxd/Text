@@ -16,10 +16,10 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
     {
         public static void CommandPatternMain()
         {
-            Receiver receiver = new Receiver();
-            ConcreteCommand command = new ConcreteCommand();
+            var receiver = new Receiver();
+            var command = new ConcreteCommand();
             command.SetReceiver(receiver);
-            Invoker invoker = new Invoker();
+            var invoker = new Invoker();
             invoker.SetCommand(command);
             invoker.ExecuteCommand();
 
@@ -38,7 +38,7 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
             this.receiver = receiver;
         }
 
-        abstract public void Execute();
+        public abstract void Execute();
     }
 
     /// <summary>
