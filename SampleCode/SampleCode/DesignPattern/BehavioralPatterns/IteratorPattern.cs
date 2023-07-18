@@ -67,7 +67,7 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
 
     public class ConcreteIterator : Iterator
     {
-        private ConcreteAggregate aggregate;
+        private readonly ConcreteAggregate aggregate;
         private int count = 0;
 
         public ConcreteIterator(ConcreteAggregate aggregate)
@@ -102,14 +102,14 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
 
     public class ConcreteAggregate : Aggregate
     {
-        private IList<object> items = new List<object>();
+        private readonly IList<object> items = new List<object>();
 
         public int Count => items.Count;
 
         public object this[int index]
         {
-            get { return items[index]; }
-            set { items.Add(value); }
+            get => items[index];
+            set => items.Add(value);
         }
 
         public override Iterator CreateIterator()
