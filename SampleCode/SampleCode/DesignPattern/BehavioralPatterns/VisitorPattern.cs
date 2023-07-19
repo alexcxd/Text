@@ -25,12 +25,19 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
         }
     }
 
+    /// <summary>
+    /// 抽象访问者
+    /// 一般是有几个具体元素就有几个访问方法。
+    /// </summary>
     public abstract class Visitor
     {
         public abstract void VisitorConcreteElementA(ConcreteElementA element);
         public abstract void VisitorConcreteElementB(ConcreteElementB element);
     }
 
+    /// <summary>
+    /// 具体访问者1
+    /// </summary>
     public class ConcreteVisitor1 : Visitor
     {
         public override void VisitorConcreteElementA(ConcreteElementA element)
@@ -44,6 +51,9 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
         }
     }
 
+    /// <summary>
+    /// 具体访问者2
+    /// </summary>
     public class ConcreteVisitor2 : Visitor
     {
         public override void VisitorConcreteElementA(ConcreteElementA element)
@@ -57,11 +67,21 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
         }
     }
 
+    /// <summary>
+    /// 抽象元素
+    /// </summary>
     public abstract class Element
     {
+        /// <summary>
+        /// 允许谁来访问
+        /// </summary>
+        /// <param name="visitor"></param>
         public abstract void Accept(Visitor visitor);
     }
 
+    /// <summary>
+    /// 具体元素A
+    /// </summary>
     public class ConcreteElementA : Element
     {
         public override void Accept(Visitor visitor)
@@ -69,7 +89,10 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
             visitor.VisitorConcreteElementA(this);
         }
     }
-    
+
+    /// <summary>
+    /// 具体元素B
+    /// </summary>
     public class ConcreteElementB : Element
     {
         public override void Accept(Visitor visitor)
