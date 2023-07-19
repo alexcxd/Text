@@ -13,7 +13,7 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
         public static void MementoPatternMain()
         {
             //MyMemento();
-            BookMemento();
+            BookMementoTest();
         }
 
         /// <summary>
@@ -21,9 +21,9 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
         /// </summary>
         /// 通过Originator的构造函数是否给MementoInfo对象来判断是否备忘
         /// 没有实现Originator和MementoInfo的分离,且备份不够灵活
-        public static void MyMemento()
+        public static void MyMementoTest()
         {
-            MyOriginator originator = new MyOriginator(new MyMementoInfo());
+            MyOriginator originator = new MyOriginator(new MyMementoManager());
             originator.State = "1";
             originator.State = "2";
             originator.State = "3";
@@ -34,11 +34,11 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
             originator.RollBack();
         }
 
-        public static void BookMemento()
+        public static void BookMementoTest()
         {
             BookOriginator originator = new BookOriginator();
             originator.State = "1";
-            var mementoInfo = new BookMementoInfo();
+            var mementoInfo = new BookMementoManager();
             mementoInfo.memento = originator.CreateMemento();
 
             originator.State = "2";
@@ -48,152 +48,155 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
             originator.Show();
 
         }
-    }
 
-    #region 书部分
-    /// <summary>
-    /// 发起人
-    /// </summary>
-    public class BookOriginator
-    {
-        public BookOriginator() { }
-
-        public string State { get; set; }
+        #region 书部分
 
         /// <summary>
-        /// 恢复备忘录
+        /// 发起人
         /// </summary>
-        public void SetMemento(BookMemento memento)
+        public class BookOriginator
         {
-            this.State = memento.State;
-        }
+            public BookOriginator() { }
 
-        /// <summary>
-        /// 创造备忘录
-        /// </summary>
-        /// <returns></returns>
-        public BookMemento CreateMemento()
-        {
-            return new BookMemento(State);
-        }
+            public string State { get; set; }
 
-        public void Show()
-        {
-            Console.WriteLine($"当前状态为：{State}");
-        }
-    }
-
-    /// <summary>
-    /// 备忘录
-    /// </summary>
-    public class BookMemento
-    {
-        private string state;
-
-        public BookMemento(string state)
-        {
-            this.state = state;
-        }
-
-        public string State { get { return state; } }
-    }
-
-    /// <summary>
-    /// 备忘录管理类
-    /// </summary>
-    public class BookMementoInfo
-    {
-        public BookMemento memento { get; set; }
-    }
-    #endregion
-
-    #region 自己部分
-    /// <summary>
-    /// 发起人
-    /// </summary>
-    public class MyOriginator
-    {
-        public MyOriginator() { }
-        public MyOriginator(MyMementoInfo mementoInfo)
-        {
-            this.mementoInfo = mementoInfo;
-        }
-
-        private string state;
-        private MyMementoInfo mementoInfo;
-        public string State
-        {
-            get => state;
-            set
+            /// <summary>
+            /// 恢复备忘录
+            /// </summary>
+            public void SetMemento(BookMemento memento)
             {
-                if (mementoInfo != null && state != null)
+                this.State = memento.State;
+            }
+
+            /// <summary>
+            /// 创造备忘录
+            /// </summary>
+            /// <returns></returns>
+            public BookMemento CreateMemento()
+            {
+                return new BookMemento(State);
+            }
+
+            public void Show()
+            {
+                Console.WriteLine($"当前状态为：{State}");
+            }
+        }
+
+        /// <summary>
+        /// 备忘录
+        /// </summary>
+        public class BookMemento
+        {
+            private string state;
+
+            public BookMemento(string state)
+            {
+                this.state = state;
+            }
+
+            public string State { get { return state; } }
+        }
+
+        /// <summary>
+        /// 备忘录管理类
+        /// </summary>
+        public class BookMementoManager
+        {
+            public BookMemento memento { get; set; }
+        }
+        #endregion
+
+        #region 自己部分
+
+        /// <summary>
+        /// 发起人
+        /// </summary>
+        public class MyOriginator
+        {
+            public MyOriginator() { }
+            public MyOriginator(MyMementoManager mementoInfo)
+            {
+                this.mementoInfo = mementoInfo;
+            }
+
+            private string state;
+            private MyMementoManager mementoInfo;
+            public string State
+            {
+                get => state;
+                set
                 {
-                    mementoInfo.memento.SetState(state);
+                    if (mementoInfo != null && state != null)
+                    {
+                        mementoInfo.Memento.SetState(state);
+                    }
+                    state = value;
+
                 }
-                state = value;
-                
+            }
+
+            /// <summary>
+            /// 回滚
+            /// </summary>
+            public void RollBack()
+            {
+                if (mementoInfo != null)
+                {
+                    this.state = mementoInfo.Memento.GetState();
+                }
+
+            }
+
+            public MyMementoManager GetMementoInfo()
+            {
+                return mementoInfo;
+            }
+
+        }
+
+        /// <summary>
+        /// 备忘录
+        /// </summary>
+        public class MyMemento
+        {
+            private Dictionary<string, DateTime> StateDictionary;
+
+            public MyMemento()
+            {
+                StateDictionary = new Dictionary<string, DateTime>();
+            }
+
+            public void SetState(string state)
+            {
+                StateDictionary.Add(state, DateTime.Now);
+            }
+
+            public string GetState()
+            {
+                var state = StateDictionary.LastOrDefault().Key;
+                StateDictionary.Remove(state);
+                return state;
+            }
+
+            public Dictionary<string, DateTime> GetStates()
+            {
+                return StateDictionary;
             }
         }
 
         /// <summary>
-        /// 回滚
+        /// 备忘录管理类
         /// </summary>
-        public void RollBack()
+        public class MyMementoManager
         {
-            if (mementoInfo != null)
+            public MyMementoManager()
             {
-                this.state = mementoInfo.memento.GetState();
+                Memento = new MyMemento();
             }
-                
+            public MyMemento Memento { get; }
         }
-
-        public MyMementoInfo GetMementoInfo()
-        {
-            return mementoInfo;
-        }
-
+        #endregion
     }
 
-    /// <summary>
-    /// 备忘录
-    /// </summary>
-    public class MyMemento
-    {
-        private Dictionary<string, DateTime> StateDictionary;
-
-        public MyMemento()
-        {
-            StateDictionary = new Dictionary<string, DateTime>();
-        }
-
-        public void SetState(string state)
-        {
-            StateDictionary.Add(state, DateTime.Now);
-        }
-
-        public string GetState()
-        {
-            var state = StateDictionary.LastOrDefault().Key;
-            StateDictionary.Remove(state);
-            return state;
-        }
-
-        public Dictionary<string, DateTime> GetStates()
-        {
-            return StateDictionary;
-        }
-    }
-
-    /// <summary>
-    /// 备忘录管理类
-    /// </summary>
-    public class MyMementoInfo
-    {
-        public MyMementoInfo()
-        {
-            memento = new MyMemento();
-        }
-        public MyMemento memento { get; }
-    }
-    #endregion
 }
