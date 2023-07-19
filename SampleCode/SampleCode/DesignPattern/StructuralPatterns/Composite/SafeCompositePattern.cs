@@ -37,43 +37,6 @@ namespace SampleCode.DesignPattern.StructuralPatterns
             root.Operation(1);
         }
 
-
-        /// <summary>
-        /// 透明式
-        /// </summary>
-        public static void CompositePattern1()
-        {
-            var root = new Composite("root");
-            root.Add(new Leaf("Leaf RA"));
-            root.Add(new Leaf("Leaf RB"));
-
-            var compositeA = new Composite("compasiteA");
-            compositeA.Add(new Leaf("Leaf CA"));
-            compositeA.Add(new Leaf("Leaf CB"));
-            root.Add(compositeA);
-
-            var compositeB = new Composite("compasiteB");
-            compositeB.Add(new Leaf("Leaf CA"));
-            compositeB.Add(new Leaf("Leaf CB"));
-            root.Add(compositeB);
-
-            //list.Remove(Object)是通过比较引用地址
-            //因此新new出的无法将List中的数据移除
-
-            var leafC = new Leaf("Leaf RC");
-            root.Add(leafC);
-            root.Operation(1);
-            var memory1 = GetMemory(leafC);
-
-            var leafC1 = new Leaf("Leaf RC");
-            root.Remove(leafC1);
-            var memory2 = GetMemory(leafC1);
-
-            root.Remove(leafC);
-            root.Operation(1);
-        }
-        
-
         /// <summary>
         /// 获取引用类型的内存地址方法    
         /// </summary>
