@@ -10,78 +10,107 @@ namespace SampleCode.DesignPattern.StructuralPatterns
     {
         public static void FacadePatternMain()
         {
-            Facade facade = new Facade();
-            facade.MethodA();
-            facade.MethodB();
+            var facade = new Facade();
+            facade.MethodAOne();
+            facade.MethodBTwo();
         }
+
+        #region 外观模式
+
+        /// <summary>
+        /// 外观类
+        /// </summary>
+        public class Facade
+        {
+            private SubSystemA aSystem;
+            private SubSystemB bSystem;
+            private SubSystemC cSystem;
+            private SubSystemD dSystem;
+
+            public Facade()
+            {
+                aSystem = new SubSystemA();
+                bSystem = new SubSystemB();
+                cSystem = new SubSystemC();
+                dSystem = new SubSystemD();
+            }
+
+            /// <summary>
+            /// 子系统A操作1
+            /// </summary>
+            public void MethodAOne()
+            {
+                Console.WriteLine("-----子系统A操作1-----");
+                aSystem.MethodOne();
+            }
+
+            /// <summary>
+            /// 子系统B操作2
+            /// </summary>
+            public void MethodBTwo()
+            {
+                Console.WriteLine("-----子系统B操作2-----");
+                bSystem.MethodTwo();
+            }
+        }
+
+        /// <summary>
+        /// 子系统A
+        /// </summary>
+        class SubSystemA
+        {
+            /// <summary>
+            /// 操作1
+            /// </summary>
+            public void MethodOne()
+            {
+                Console.WriteLine("子系统方法一");
+            }
+        }
+
+        /// <summary>
+        /// 子系统B
+        /// </summary>
+        public class SubSystemB
+        {
+            /// <summary>
+            /// 操作2
+            /// </summary>
+            public void MethodTwo()
+            {
+                Console.WriteLine("子系统方法二");
+            }
+        }
+
+        /// <summary>
+        /// 子系统C
+        /// </summary>
+        public class SubSystemC
+        {
+            /// <summary>
+            /// 操作3
+            /// </summary>
+            public void MethodThree()
+            {
+                Console.WriteLine("子系统方法三");
+            }
+        }
+
+        /// <summary>
+        /// 子系统D
+        /// </summary>
+        public class SubSystemD
+        {
+            /// <summary>
+            /// 操作4
+            /// </summary>
+            public void MethodFour()
+            {
+                Console.WriteLine("子系统方法四");
+            }
+        }
+
+        #endregion
     }
 
-    class SubSystemOne
-    {
-        public void MethodOne()
-        {
-            Console.WriteLine("子系统方法一");
-        }
-    }
-
-    class SubSystemTwo
-    {
-        public void MethodTwo()
-        {
-            Console.WriteLine("子系统方法二");
-        }
-    }
-
-    class SubSystemThree
-    {
-        public void MethodThree()
-        {
-            Console.WriteLine("子系统方法三");
-        }
-    }
-
-    class SubSystemFour
-    {
-        public void MethodFour()
-        {
-            Console.WriteLine("子系统方法四");
-        }
-    }
-
-    /// <summary>
-    /// 外观类
-    /// </summary>
-    public class Facade
-    {
-        private SubSystemOne one;
-        private SubSystemTwo two;
-        private SubSystemThree three;
-        private SubSystemFour four;
-
-        public Facade()
-        {
-            one = new SubSystemOne();
-            two = new SubSystemTwo();
-            three = new SubSystemThree();
-            four = new SubSystemFour();
-        }
-
-        public void MethodA()
-        {
-            Console.WriteLine("-----方法组A-----");
-            one.MethodOne();
-            two.MethodTwo();
-            three.MethodThree();
-            four.MethodFour();
-        }
-
-
-        public void MethodB()
-        {
-            Console.WriteLine("-----方法组B-----");
-            one.MethodOne();
-            three.MethodThree();
-            four.MethodFour();
-        }
-    }
 }
