@@ -13,23 +13,23 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
     {
         public static void ObserverPatternMain()
         {
-            Subject1 subject = new ConcreteSubserver();
+            Subject subject = new ConcreteSubject();
             subject.Attach(new ConcreteObserver("订阅者A"));
             subject.Attach(new ConcreteObserver("订阅者B"));
             subject.Attach(new ConcreteObserver("订阅者C"));
 
-            subject.info = "某种变化";
+            subject.Info = "某种变化";
             subject.Notify();
         }
     }
 
     /// <summary>
-    /// 观测者抽象类
+    /// 被观察者抽象类
     /// </summary>
-    public abstract class Subject1
+    public abstract class Subject
     {
         private List<IObserver> observers = new List<IObserver>();
-        public string info { get; set; }
+        public string Info { get; set; }
 
         public void Attach(IObserver observer)
         {
@@ -52,23 +52,23 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
     }
 
     /// <summary>
-    /// 具体观察者
+    /// 具体被观察者
     /// </summary>
-    public class ConcreteSubserver : Subject1
+    public class ConcreteSubject : Subject
     {
 
     }
 
     /// <summary>
-    /// 订阅者要实现的接口
+    /// 观察者接口
     /// </summary>
     public  interface IObserver
     {
-        void Update(Subject1 subject);
+        void Update(Subject subject);
     }
 
     /// <summary>
-    /// 具体订阅者
+    /// 具体观察者
     /// </summary>
     public class ConcreteObserver : IObserver
     {
@@ -79,9 +79,9 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
             this.Name = name;
         }
 
-        public void Update(Subject1 subject)
+        public void Update(Subject subject)
         {
-            Console.WriteLine($"{Name}观察到了 {subject.info}");
+            Console.WriteLine($"{Name}观察到了 {subject.Info}");
         }
     }
 }
