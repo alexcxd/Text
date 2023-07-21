@@ -13,7 +13,7 @@ namespace SampleCode.Test.DesignPattern.StructuralPatterns
         [Test]
         public void AdapterPatternCodeTest()
         {
-            Target adapter = new Adapter();
+            var adapter = new ClassAdapterPattern.Adapter();
             adapter.Request();
         }
     }

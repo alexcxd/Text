@@ -12,11 +12,7 @@ namespace SampleCode.Test.DesignPattern.BehavioralPatterns
         [Test]
         public void StatePatternCodeTest()
         {
-            StateContext context = new StateContext(new ConcreteStateA());
-            context.Request();
-            context.Request();
-            context.Request();
-            context.Request();
+            StatePattern.StatePatternMain();
         }
     }
 }

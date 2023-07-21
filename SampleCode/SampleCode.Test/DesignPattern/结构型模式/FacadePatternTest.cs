@@ -12,9 +12,7 @@ namespace SampleCode.Test.DesignPattern.StructuralPatterns
         [Test]
         public void FacadePatternCodeTest()
         {
-            Facade facade = new Facade();
-            facade.MethodA();
-            facade.MethodB();
+            FacadePattern.FacadePatternMain();
         }
     }
 }

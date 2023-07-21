@@ -9,18 +9,17 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
     /// <summary>
     /// 访问者模式
     /// </summary>
-    /// ???未理解透
     public class VisitorPattern
     {
         public static void VisitorPatternMain()
         {
-            ConcreteElementA elementA = new ConcreteElementA();
-            ConcreteElementB elementB = new ConcreteElementB();
-            ObjectStruture struture = new ObjectStruture();
+            var elementA = new ConcreteElementA();
+            var elementB = new ConcreteElementB();
+            var struture = new ObjectStruture();
             struture.Add(elementA);
             struture.Add(elementB);
 
-            ConcreteVisitor1 v1 = new ConcreteVisitor1();
+            var v1 = new ConcreteVisitor1();
             struture.Aceppt(v1);
         }
     }
@@ -101,6 +100,10 @@ namespace SampleCode.DesignPattern.BehavioralPatterns
         }
     }
 
+    /// <summary>
+    /// 元素产生者
+    /// 一般容纳在多个不同类、不同接口的容器，如List、Set、Map等，在项目中，一般很少抽象出这个角色。
+    /// </summary>
     public class ObjectStruture
     {
         private List<Element> elements = new List<Element>();

@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using SampleCode.DesignPattern.BehavioralPatterns;
 
 namespace SampleCode
 {
@@ -13,6 +14,8 @@ namespace SampleCode
 
         public static void Main(string[] args)
         {
+            StatePattern.StatePatternMain();
+
             for (int i = 0; i < 2; i++)
             {
                 Task.Run(() =>
