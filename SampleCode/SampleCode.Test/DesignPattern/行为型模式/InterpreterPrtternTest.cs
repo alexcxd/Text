@@ -13,13 +13,13 @@ namespace SampleCode.Test.DesignPattern.BehavioralPatterns
         [Test]
         public void InterpreterPatternCodeTest()
         {
-            Context2 context = new Context2();
-            List<Expression１> expressions = new List<Expression１>();
+            InterpreterPattern.Context2 context = new InterpreterPattern.Context2();
+            List<InterpreterPattern.Expression1> expressions = new List<InterpreterPattern.Expression1>();
 
-            expressions.Add(new TerminalExpression());
-            expressions.Add(new NonterminalExpression());
-            expressions.Add(new TerminalExpression());
-            expressions.Add(new TerminalExpression());
+            expressions.Add(new InterpreterPattern.TerminalExpression());
+            expressions.Add(new InterpreterPattern.NonterminalExpression());
+            expressions.Add(new InterpreterPattern.TerminalExpression());
+            expressions.Add(new InterpreterPattern.TerminalExpression());
 
             foreach (var expression in expressions)
             {

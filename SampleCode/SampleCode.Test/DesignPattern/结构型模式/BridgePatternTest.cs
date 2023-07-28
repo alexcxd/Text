@@ -14,10 +14,10 @@ namespace SampleCode.Test.DesignPattern.StructuralPatterns
         public void BridgePatternCodeTest()
         {
             RefinedAbstranction abstranction = new RefinedAbstranction();
-            abstranction.SetImplementor(new ConreteImplementorA());
+            abstranction.SetImplementor(new ConcreteImplementorA());
             abstranction.Operation();
 
-            abstranction.SetImplementor(new ConreteImplementorB());
+            abstranction.SetImplementor(new ConcreteImplementorB());
             abstranction.Operation();
         }
 

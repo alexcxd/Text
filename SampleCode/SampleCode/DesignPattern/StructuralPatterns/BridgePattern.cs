@@ -12,10 +12,10 @@ namespace SampleCode.DesignPattern.StructuralPatterns
         public static void BridgePatternMian()
         {
             RefinedAbstranction abstranction = new RefinedAbstranction();
-            abstranction.SetImplementor(new ConreteImplementorA());
+            abstranction.SetImplementor(new ConcreteImplementorA());
             abstranction.Operation();
 
-            abstranction.SetImplementor(new ConreteImplementorB());
+            abstranction.SetImplementor(new ConcreteImplementorB());
             abstranction.Operation();
         }
     }
@@ -32,7 +32,7 @@ namespace SampleCode.DesignPattern.StructuralPatterns
     /// <summary>
     /// 实现具体类A
     /// </summary>
-    public class ConreteImplementorA : Implementor
+    public class ConcreteImplementorA : Implementor
     {
         public override void Operator()
         {
@@ -43,7 +43,7 @@ namespace SampleCode.DesignPattern.StructuralPatterns
     /// <summary>
     /// 实现具体类B
     /// </summary>
-    public class ConreteImplementorB : Implementor
+    public class ConcreteImplementorB : Implementor
     {
         public override void Operator()
         {
